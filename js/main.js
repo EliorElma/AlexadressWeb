@@ -12,7 +12,7 @@ const CONFIG = {
   // Leads by email (Web3Forms). Get a free key in 30s at https://web3forms.com
   // (enter your email, copy the "Access Key" they show/email you) and paste it
   // here. Until you do, the quiz still opens WhatsApp as before.
-  web3formsKey: 'YOUR_WEB3FORMS_ACCESS_KEY',
+  web3formsKey: '21ce0d52-6e7d-486d-81f7-e89a9ab53ca8',
   leadEmailSubject: 'ליד חדש ממבחן הסטייל — אלכסה בריידל',
 
   // Every dress shown in the collection. slot N maps to images/dress-N.jpg
