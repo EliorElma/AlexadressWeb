@@ -73,9 +73,10 @@ a:hover { color: var(--accent); }
 
 .ticker {
   position: fixed; top: 84px; left: 0; right: 0; z-index: 99;
-  background: var(--ink); overflow: hidden; padding: 9px 0;
+  background: var(--ink); overflow: hidden; padding: 9px 0; direction: ltr;
 }
-.ticker-track { display: flex; white-space: nowrap; animation: marquee 24s linear infinite; width: max-content; }
+/* direction:ltr anchors the track to the LEFT so the -50% loop never opens a gap (page is RTL) */
+.ticker-track { display: flex; white-space: nowrap; animation: marquee 24s linear infinite; width: max-content; direction: ltr; }
 .ticker-track span.item {
   color: var(--bg-alt); font-size: 13px; font-weight: 500; letter-spacing: .06em;
   padding: 0 24px; display: inline-flex; align-items: center; gap: 24px;
@@ -134,10 +135,10 @@ a:hover { color: var(--accent); }
   position: relative; overflow: hidden; min-height: 58vh; display: flex;
   align-items: center; justify-content: center; background: transparent; padding: 34px 0;
 }
-.photo-band .layer { position: absolute; inset: 0; width: 100%; overflow: hidden; display: flex; }
+.photo-band .layer { position: absolute; inset: 0; width: 100%; overflow: hidden; display: flex; direction: ltr; justify-content: flex-start; }
 .photo-band .layer.back { z-index: 1; align-items: center; }
-.photo-band .layer.back .track { animation: marquee 60s linear infinite; }
-.photo-band .track { display: flex; align-items: center; width: max-content; }
+.photo-band .layer.back .track { animation: marquee 90s linear infinite; }
+.photo-band .track { display: flex; align-items: center; width: max-content; direction: ltr; }
 .photo-band .card {
   width: 300px; aspect-ratio: 2/3; margin-inline-start: 16px; flex: 0 0 auto;
   border-radius: 6px; overflow: hidden; box-shadow: 0 18px 40px rgba(74,59,44,.2);
@@ -154,7 +155,7 @@ a:hover { color: var(--accent); }
 
 /* cutout marquee (top band): big transparent people floating on the page bg */
 .photo-band.cutout { min-height: 54vh; padding: 10px 0; margin-top: 124px; }
-.photo-band.cutout .layer.back .track { animation-duration: 44s; }
+.photo-band.cutout .layer.back .track { animation-duration: 75s; }
 .photo-band.cutout .card {
   width: auto; height: 54vh; max-height: 540px; aspect-ratio: auto;
   margin-inline-start: 14px; background: none; box-shadow: none;
@@ -184,6 +185,11 @@ a:hover { color: var(--accent); }
 .photo-band.in-view .drop-you::after  { animation: xMark2 .28s ease 1.78s forwards; }
 @keyframes xMark1 { from { opacity: 0; transform: rotate(24deg) scaleX(0); } to { opacity: 1; transform: rotate(24deg) scaleX(1); } }
 @keyframes xMark2 { from { opacity: 0; transform: rotate(-24deg) scaleX(0); } to { opacity: 1; transform: rotate(-24deg) scaleX(1); } }
+
+/* ...and while the X is drawn, the correct YOU fades in, growing brighter */
+.photo-band .big-words .hl { display: inline-block; }
+.photo-band.in-view .big-words .hl { animation: youReveal 2.4s ease 1.55s both; }
+@keyframes youReveal { from { opacity: 0; } 60% { opacity: .45; } to { opacity: 1; } }
 
 @media (max-width: 760px) {
   .photo-band .card { width: 190px; }
