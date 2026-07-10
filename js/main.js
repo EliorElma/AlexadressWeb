@@ -1,47 +1,109 @@
 // ===================================================================
 // Alexa Bridal — site script
-// Edit the CONFIG section below to change copy, dresses, quiz logic,
-// WhatsApp number, etc. No build step needed — plain JS.
+// ALL content lives in js/site-config.js (the SITE object).
+// This file only renders it — you should not need to edit here.
 // ===================================================================
 
-const CONFIG = {
-  whatsappNumber: '972544806554', // international format, no + or leading 0
-  instagramHandle: 'alexa.bridal',
-  fullSiteUrl: 'https://bridals-il.com',
+/* eslint-disable no-undef */
+if (typeof SITE === 'undefined') {
+  console.error('site-config.js לא נטען — ודאי שהוא מופיע לפני main.js');
+}
 
-  // Leads by email (Web3Forms). Get a free key in 30s at https://web3forms.com
-  // (enter your email, copy the "Access Key" they show/email you) and paste it
-  // here. Until you do, the quiz still opens WhatsApp as before.
-  web3formsKey: '21ce0d52-6e7d-486d-81f7-e89a9ab53ca8',
-  leadEmailSubject: 'ליד חדש ממבחן הסטייל — אלכסה בריידל',
+// ---------------------------------------------------------------
+// Render: moving photo bands
+// Repeats the image list until each half is long enough, then doubles
+// it — the CSS -50% loop needs two identical halves to run seamlessly.
+// ---------------------------------------------------------------
+function fillBand(name, imgs) {
+  const track = document.querySelector('[data-band="' + name + '"]');
+  if (!track || !imgs || !imgs.length) return;
+  const half = [];
+  while (half.length < 12) half.push(...imgs);
+  track.innerHTML = half.concat(half)
+    .map(src => '<div class="card"><img src="' + src + '" alt=""></div>')
+    .join('');
+}
+fillBand('first', SITE.first_band);
+fillBand('second', SITE.second_band);
 
-  // Every dress shown in the collection. slot N maps to images/dress-N.jpg
-  dresses: [
-    { name: 'הילה', price: '3,800 ₪', img: 'images/dress-1.jpg', link: 'https://bridals-il.com/product/הילה/' },
-    { name: 'קים', price: '3,800 ₪', img: 'images/dress-2.jpg', link: 'https://bridals-il.com/product/קים/' },
-    { name: 'מיקה', price: '3,800 ₪', img: 'images/dress-3.jpg', link: 'https://bridals-il.com/product/מיקה/' },
-    { name: 'עמית', price: '3,800 ₪', img: 'images/dress-4.jpg', link: 'https://bridals-il.com/product/עמית/' },
-    { name: 'רומא', price: '3,800 ₪', img: 'images/dress-5.jpg', link: 'https://bridals-il.com/product/רומא/' },
-    { name: 'פריז', price: '3,800 ₪', img: 'images/dress-6.jpg', link: 'https://bridals-il.com/product/פריז/' }
-  ],
+// ---------------------------------------------------------------
+// Render: hero image
+// ---------------------------------------------------------------
+const heroImg = document.querySelector('[data-hero-img]');
+if (heroImg && SITE.head_pic) heroImg.src = SITE.head_pic;
 
-  // The 3 quiz questions. Add/remove options freely — just also update
-  // questionDressMap below so every option maps to a dress name.
-  quizSteps: [
-    { q: 'עוד לא יודעת איזו שמלה מתאימה לך?', sub: 'עני על 3 שאלות קצרות ונבחר יחד את השמלות שהכי מתאימות לסגנון שלך.', options: ['רומנטית וקלילה', 'קלאסית ונקייה', 'נועזת ומיוחדת'] },
-    { q: 'איזו גזרה הכי את?', sub: '', options: ['A-line נשית', 'מחשוף לב ותחרה', 'נשפכת ומינימליסטית'] },
-    { q: 'איפה תרקדי הכי הרבה?', sub: '', options: ['אולם מרווח', 'חצר וגינה', 'חוף ים'] }
-  ],
+// ---------------------------------------------------------------
+// Render: collection (Front / Back / optional Detail + zoom)
+// ---------------------------------------------------------------
+(function renderCollection() {
+  const grid = document.querySelector('[data-collection]');
+  if (!grid) return;
+  grid.innerHTML = SITE.dresses.map(d => {
+    const detailImg = d.detail
+      ? '<img class="img-third" src="' + d.detail + '" alt="' + d.name + ', פרט">'
+      : '';
+    const detailSeg = d.detail ? '<span class="seg" data-side="third">Detail</span>' : '';
+    return '' +
+      '<a class="dress-card" href="' + d.link + '" target="_blank" rel="noopener">' +
+        '<img class="img-front" src="' + d.front + '" alt="' + d.name + '">' +
+        '<img class="img-back" src="' + d.back + '" alt="' + d.name + ', גב השמלה">' +
+        detailImg +
+        '<button type="button" class="fb-toggle" aria-label="בחרי תצוגה">' +
+          '<span class="seg active" data-side="front">Front</span>' +
+          '<span class="seg" data-side="back">Back</span>' +
+          detailSeg +
+        '</button>' +
+        '<button type="button" class="zoom-btn" aria-label="הגדלה">⤢</button>' +
+        '<div class="caption"><h3 class="serif">' + d.name + '</h3><div class="price">' + d.price + '</div></div>' +
+      '</a>';
+  }).join('');
+})();
 
-  // Maps EVERY quiz answer (across all 3 questions) to a recommended dress name.
-  // At the end we take the (up to 3) unique dresses recommended by the bride's
-  // 3 answers. Edit freely — dress name must match a "name" in CONFIG.dresses.
-  questionDressMap: [
-    { 'רומנטית וקלילה': 'הילה', 'קלאסית ונקייה': 'קים', 'נועזת ומיוחדת': 'מיקה' },
-    { 'A-line נשית': 'עמית', 'מחשוף לב ותחרה': 'רומא', 'נשפכת ומינימליסטית': 'פריז' },
-    { 'אולם מרווח': 'הילה', 'חצר וגינה': 'קים', 'חוף ים': 'מיקה' }
-  ]
-};
+// ---------------------------------------------------------------
+// Render: real brides
+// ---------------------------------------------------------------
+(function renderBrides() {
+  const row = document.querySelector('[data-brides]');
+  if (!row) return;
+  row.innerHTML = SITE.real_brides.map(b =>
+    '<div class="card"><img src="' + b.pic + '" alt="' + b.name + '">' +
+    '<div class="caption"><div class="name serif">' + b.name + '</div><div class="date">' + b.date + '</div></div></div>'
+  ).join('');
+})();
+
+// ---------------------------------------------------------------
+// Render: moments collage
+// ---------------------------------------------------------------
+(function renderMoments() {
+  const grid = document.querySelector('[data-moments]');
+  if (!grid) return;
+  grid.innerHTML = SITE.moments.map(src =>
+    '<div class="tile"><img src="' + src + '" alt=""></div>'
+  ).join('');
+})();
+
+// ---------------------------------------------------------------
+// Render: testimonials
+// ---------------------------------------------------------------
+(function renderTestimonials() {
+  const grid = document.querySelector('[data-testimonials]');
+  if (!grid) return;
+  grid.innerHTML = SITE.testimonials.map(t =>
+    '<div class="card"><div class="stars">✦ ✦ ✦ ✦ ✦</div><p>' + t.text + '</p><div class="who">' + t.who + '</div></div>'
+  ).join('');
+})();
+
+// ---------------------------------------------------------------
+// Render: instagram grid
+// ---------------------------------------------------------------
+(function renderInstagram() {
+  const grid = document.querySelector('[data-instagram]');
+  if (!grid) return;
+  const link = 'https://instagram.com/' + SITE.instagramHandle;
+  grid.innerHTML = SITE.instagram_pics.map(src =>
+    '<a href="' + link + '" target="_blank" rel="noopener"><img src="' + src + '" alt="פוסט אינסטגרם"></a>'
+  ).join('');
+})();
 
 // ---------------------------------------------------------------
 // Mobile menu
@@ -66,6 +128,8 @@ if (menuBtn && mobileMenu) {
   const root = document.querySelector('[data-quiz]');
   if (!root) return;
 
+  const steps = SITE.quiz.steps;
+  const answerDressMap = SITE.quiz.answerDressMap;
   const state = { step: 0, selections: {}, done: false };
 
   const dotsEl = root.querySelector('[data-quiz-dots]');
@@ -78,7 +142,7 @@ if (menuBtn && mobileMenu) {
 
   function renderDots() {
     dotsEl.innerHTML = '';
-    for (let i = 0; i < CONFIG.quizSteps.length + 1; i++) {
+    for (let i = 0; i < steps.length + 1; i++) {
       const dot = document.createElement('span');
       if (i <= state.step && !state.done) dot.classList.add('active');
       dotsEl.appendChild(dot);
@@ -93,12 +157,12 @@ if (menuBtn && mobileMenu) {
     if (state.done) { dotsEl.style.display = 'none'; return; }
     dotsEl.style.display = 'flex';
 
-    if (state.step >= CONFIG.quizSteps.length) {
+    if (state.step >= steps.length) {
       formEl.style.display = 'block';
       return;
     }
 
-    const s = CONFIG.quizSteps[state.step];
+    const s = steps[state.step];
     const wrap = document.createElement('div');
     wrap.className = 'quiz-step active';
 
@@ -132,16 +196,16 @@ if (menuBtn && mobileMenu) {
   }
 
   function getResultDresses() {
-    const names = CONFIG.questionDressMap
+    const names = answerDressMap
       .map((map, i) => map[state.selections[i]])
       .filter(Boolean);
     let chosen = [...new Set(names)];
     while (chosen.length < 3) {
-      const filler = CONFIG.dresses.find(d => !chosen.includes(d.name));
+      const filler = SITE.dresses.find(d => !chosen.includes(d.name));
       if (!filler) break;
       chosen.push(filler.name);
     }
-    return chosen.slice(0, 3).map(name => CONFIG.dresses.find(d => d.name === name)).filter(Boolean);
+    return chosen.slice(0, 3).map(name => SITE.dresses.find(d => d.name === name)).filter(Boolean);
   }
 
   if (formEl) {
@@ -159,7 +223,7 @@ if (menuBtn && mobileMenu) {
       resultDressesEl.innerHTML = '';
       dresses.forEach(d => {
         const fig = document.createElement('figure');
-        fig.innerHTML = `<img src="${d.img}" alt="${d.name}"><figcaption>${d.name}</figcaption>`;
+        fig.innerHTML = '<img src="' + d.front + '" alt="' + d.name + '"><figcaption>' + d.name + '</figcaption>';
         resultDressesEl.appendChild(fig);
       });
 
@@ -170,13 +234,13 @@ if (menuBtn && mobileMenu) {
         'השמלות שהתאימו לי: ' + dressNames;
 
       // 1) Send the lead to email via Web3Forms (only if a key was set).
-      if (CONFIG.web3formsKey && CONFIG.web3formsKey !== 'YOUR_WEB3FORMS_ACCESS_KEY') {
+      if (SITE.web3formsKey && SITE.web3formsKey !== 'YOUR_WEB3FORMS_ACCESS_KEY') {
         fetch('https://api.web3forms.com/submit', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
           body: JSON.stringify({
-            access_key: CONFIG.web3formsKey,
-            subject: CONFIG.leadEmailSubject,
+            access_key: SITE.web3formsKey,
+            subject: SITE.leadEmailSubject,
             from_name: 'אתר אלכסה בריידל',
             'שם': name || '-',
             'טלפון': phone || '-',
@@ -186,7 +250,7 @@ if (menuBtn && mobileMenu) {
       }
 
       // 2) Also open WhatsApp with the ready-made message (as before).
-      window.open('https://wa.me/' + CONFIG.whatsappNumber + '?text=' + encodeURIComponent(msg), '_blank');
+      window.open('https://wa.me/' + SITE.whatsappNumber + '?text=' + encodeURIComponent(msg), '_blank');
     });
   }
 
@@ -195,13 +259,12 @@ if (menuBtn && mobileMenu) {
 })();
 
 // ---------------------------------------------------------------
-// "THE DRESS THAT [YOU] CHOOSES YOU" — drop the word in when scrolled into view
+// "THE DRESS THAT YOU CHOOSES YOU" — play the drop/X/fade sequence
+// ONCE when the band first becomes visible; never reset on scroll.
 // ---------------------------------------------------------------
 (function initDropYou() {
   const band = document.getElementById('dress-band');
   if (!band) return;
-  // Play the sequence ONCE when the band first becomes visible, and never
-  // reset it — small scroll jitters must not restart/hide the animation.
   function check() {
     const r = band.getBoundingClientRect();
     const vh = window.innerHeight || document.documentElement.clientHeight;
@@ -218,9 +281,6 @@ if (menuBtn && mobileMenu) {
 
 // ---------------------------------------------------------------
 // Collection cards: Front / Back / Detail toggle + zoom lightbox
-// The "Detail" (third) image is optional — if a card has no .img-third,
-// its Detail button is removed automatically. So to add a dress without
-// a third photo, just leave out the <img class="img-third"> line.
 // ---------------------------------------------------------------
 (function initCollection() {
   const lb = document.getElementById('lightbox');
@@ -244,9 +304,6 @@ if (menuBtn && mobileMenu) {
   }
 
   document.querySelectorAll('.dress-card').forEach(card => {
-    const thirdSeg = card.querySelector('.seg[data-side="third"]');
-    if (thirdSeg && !card.querySelector('.img-third')) thirdSeg.remove();
-
     function show(side) {
       card.classList.toggle('show-back', side === 'back');
       card.classList.toggle('show-third', side === 'third');

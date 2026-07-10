@@ -62,34 +62,10 @@
   </div>
 
   <!-- ============ PHOTO BAND 1 (cutout marquee — above the hero) ============ -->
+  <!-- images come from first_band in js/site-config.js -->
   <div class="photo-band cutout">
     <div class="layer back">
-      <div class="track">
-        <div class="card"><img src="images/band-1.png" alt=""></div>
-        <div class="card"><img src="images/band-2.png" alt=""></div>
-        <div class="card"><img src="images/band-3.png" alt=""></div>
-        <div class="card"><img src="images/band-4.png" alt=""></div>
-        <div class="card"><img src="images/band-1.png" alt=""></div>
-        <div class="card"><img src="images/band-2.png" alt=""></div>
-        <div class="card"><img src="images/band-3.png" alt=""></div>
-        <div class="card"><img src="images/band-4.png" alt=""></div>
-        <div class="card"><img src="images/band-1.png" alt=""></div>
-        <div class="card"><img src="images/band-2.png" alt=""></div>
-        <div class="card"><img src="images/band-3.png" alt=""></div>
-        <div class="card"><img src="images/band-4.png" alt=""></div>
-        <div class="card"><img src="images/band-1.png" alt=""></div>
-        <div class="card"><img src="images/band-2.png" alt=""></div>
-        <div class="card"><img src="images/band-3.png" alt=""></div>
-        <div class="card"><img src="images/band-4.png" alt=""></div>
-        <div class="card"><img src="images/band-1.png" alt=""></div>
-        <div class="card"><img src="images/band-2.png" alt=""></div>
-        <div class="card"><img src="images/band-3.png" alt=""></div>
-        <div class="card"><img src="images/band-4.png" alt=""></div>
-        <div class="card"><img src="images/band-1.png" alt=""></div>
-        <div class="card"><img src="images/band-2.png" alt=""></div>
-        <div class="card"><img src="images/band-3.png" alt=""></div>
-        <div class="card"><img src="images/band-4.png" alt=""></div>
-      </div>
+      <div class="track" data-band="first"></div>
     </div>
     <div class="big-words serif">FALL <span class="hl">IN LOVE.</span> TAKE IT HOME</div>
   </div>
@@ -106,7 +82,7 @@
       </div>
     </div>
     <div class="hero-media">
-      <img src="images/hero.jpg" alt="תמונת שמלה ראשית">
+      <img src="images/hero.jpg" alt="תמונת שמלה ראשית" data-hero-img>
       <a href="#quiz" class="hero-quiz-badge">
         <span class="star">✦</span>
         <span class="txt"><b>מבחן הסטייל</b>מצאי את 3 השמלות המושלמות עבורך</span>
@@ -186,80 +162,8 @@
       <h2 class="section-title serif">OWN YOUR MOMENT</h2>
       <p class="section-sub">מבחר משמלות הסטודיו — כולן נתפרות ביד, כולן במחיר אחיד</p>
     </div>
-    <div class="collection-grid">
-      <a class="dress-card" href="https://bridals-il.com/product/הילה/" target="_blank" rel="noopener" data-dress="1">
-        <img class="img-front" src="images/dress-1.jpg" alt="הילה">
-        <img class="img-back" src="images/dress-1-back.jpg" alt="הילה, גב השמלה">
-        <img class="img-third" src="images/dress-1-third.jpg" alt="הילה, פרט">
-        <button type="button" class="fb-toggle" aria-label="בחרי תצוגה">
-          <span class="seg active" data-side="front">Front</span>
-          <span class="seg" data-side="back">Back</span>
-          <span class="seg" data-side="third">Detail</span>
-        </button>
-        <button type="button" class="zoom-btn" aria-label="הגדלה">⤢</button>
-        <div class="caption"><h3 class="serif">הילה</h3><div class="price">3,800 ₪</div></div>
-      </a>
-      <a class="dress-card" href="https://bridals-il.com/product/קים/" target="_blank" rel="noopener" data-dress="2">
-        <img class="img-front" src="images/dress-2.jpg" alt="קים">
-        <img class="img-back" src="images/dress-2-back.jpg" alt="קים, גב השמלה">
-        <img class="img-third" src="images/dress-2-third.jpg" alt="קים, פרט">
-        <button type="button" class="fb-toggle" aria-label="בחרי תצוגה">
-          <span class="seg active" data-side="front">Front</span>
-          <span class="seg" data-side="back">Back</span>
-          <span class="seg" data-side="third">Detail</span>
-        </button>
-        <button type="button" class="zoom-btn" aria-label="הגדלה">⤢</button>
-        <div class="caption"><h3 class="serif">קים</h3><div class="price">3,800 ₪</div></div>
-      </a>
-      <a class="dress-card" href="https://bridals-il.com/product/מיקה/" target="_blank" rel="noopener" data-dress="3">
-        <img class="img-front" src="images/dress-3.jpg" alt="מיקה">
-        <img class="img-back" src="images/dress-3-back.jpg" alt="מיקה, גב השמלה">
-        <img class="img-third" src="images/dress-3-third.jpg" alt="מיקה, פרט">
-        <button type="button" class="fb-toggle" aria-label="בחרי תצוגה">
-          <span class="seg active" data-side="front">Front</span>
-          <span class="seg" data-side="back">Back</span>
-          <span class="seg" data-side="third">Detail</span>
-        </button>
-        <button type="button" class="zoom-btn" aria-label="הגדלה">⤢</button>
-        <div class="caption"><h3 class="serif">מיקה</h3><div class="price">3,800 ₪</div></div>
-      </a>
-      <a class="dress-card" href="https://bridals-il.com/product/עמית/" target="_blank" rel="noopener" data-dress="4">
-        <img class="img-front" src="images/dress-4.jpg" alt="עמית">
-        <img class="img-back" src="images/dress-4-back.jpg" alt="עמית, גב השמלה">
-        <img class="img-third" src="images/dress-4-third.jpg" alt="עמית, פרט">
-        <button type="button" class="fb-toggle" aria-label="בחרי תצוגה">
-          <span class="seg active" data-side="front">Front</span>
-          <span class="seg" data-side="back">Back</span>
-          <span class="seg" data-side="third">Detail</span>
-        </button>
-        <button type="button" class="zoom-btn" aria-label="הגדלה">⤢</button>
-        <div class="caption"><h3 class="serif">עמית</h3><div class="price">3,800 ₪</div></div>
-      </a>
-      <a class="dress-card" href="https://bridals-il.com/product/רומא/" target="_blank" rel="noopener" data-dress="5">
-        <img class="img-front" src="images/dress-5.jpg" alt="רומא">
-        <img class="img-back" src="images/dress-5-back.jpg" alt="רומא, גב השמלה">
-        <img class="img-third" src="images/dress-5-third.jpg" alt="רומא, פרט">
-        <button type="button" class="fb-toggle" aria-label="בחרי תצוגה">
-          <span class="seg active" data-side="front">Front</span>
-          <span class="seg" data-side="back">Back</span>
-          <span class="seg" data-side="third">Detail</span>
-        </button>
-        <button type="button" class="zoom-btn" aria-label="הגדלה">⤢</button>
-        <div class="caption"><h3 class="serif">רומא</h3><div class="price">3,800 ₪</div></div>
-      </a>
-      <a class="dress-card" href="https://bridals-il.com/product/פריז/" target="_blank" rel="noopener" data-dress="6">
-        <img class="img-front" src="images/dress-6.jpg" alt="פריז">
-        <img class="img-back" src="images/dress-6-back.jpg" alt="פריז, גב השמלה">
-        <img class="img-third" src="images/dress-6-third.jpg" alt="פריז, פרט">
-        <button type="button" class="fb-toggle" aria-label="בחרי תצוגה">
-          <span class="seg active" data-side="front">Front</span>
-          <span class="seg" data-side="back">Back</span>
-          <span class="seg" data-side="third">Detail</span>
-        </button>
-        <button type="button" class="zoom-btn" aria-label="הגדלה">⤢</button>
-        <div class="caption"><h3 class="serif">פריז</h3><div class="price">3,800 ₪</div></div>
-      </a>
-    </div>
+    <!-- dresses come from "dresses" in js/site-config.js -->
+    <div class="collection-grid" data-collection></div>
     <div class="collection-cta">
       <a href="https://bridals-il.com" target="_blank" rel="noopener" class="btn-solid">לקולקציה המלאה באתר</a>
     </div>
@@ -278,34 +182,10 @@
   </section>
 
   <!-- ============ PHOTO BAND 2 ============ -->
+  <!-- images come from second_band in js/site-config.js -->
   <div class="photo-band" id="dress-band" style="min-height:55vh;">
     <div class="layer back">
-      <div class="track">
-        <div class="card"><img src="images/dress-1.jpg" alt=""></div>
-        <div class="card"><img src="images/bride-1.jpg" alt=""></div>
-        <div class="card"><img src="images/dress-2.jpg" alt=""></div>
-        <div class="card"><img src="images/bride-2.jpg" alt=""></div>
-        <div class="card"><img src="images/dress-3.jpg" alt=""></div>
-        <div class="card"><img src="images/bride-3.jpg" alt=""></div>
-        <div class="card"><img src="images/dress-4.jpg" alt=""></div>
-        <div class="card"><img src="images/bride-4.jpg" alt=""></div>
-        <div class="card"><img src="images/dress-5.jpg" alt=""></div>
-        <div class="card"><img src="images/bride-5.jpg" alt=""></div>
-        <div class="card"><img src="images/dress-6.jpg" alt=""></div>
-        <div class="card"><img src="images/bride-6.jpg" alt=""></div>
-        <div class="card"><img src="images/dress-1.jpg" alt=""></div>
-        <div class="card"><img src="images/bride-1.jpg" alt=""></div>
-        <div class="card"><img src="images/dress-2.jpg" alt=""></div>
-        <div class="card"><img src="images/bride-2.jpg" alt=""></div>
-        <div class="card"><img src="images/dress-3.jpg" alt=""></div>
-        <div class="card"><img src="images/bride-3.jpg" alt=""></div>
-        <div class="card"><img src="images/dress-4.jpg" alt=""></div>
-        <div class="card"><img src="images/bride-4.jpg" alt=""></div>
-        <div class="card"><img src="images/dress-5.jpg" alt=""></div>
-        <div class="card"><img src="images/bride-5.jpg" alt=""></div>
-        <div class="card"><img src="images/dress-6.jpg" alt=""></div>
-        <div class="card"><img src="images/bride-6.jpg" alt=""></div>
-      </div>
+      <div class="track" data-band="second"></div>
     </div>
     <div class="big-words serif">THE DRESS THAT <span class="drop-you">YOU</span> CHOOSES <span class="hl">YOU</span></div>
   </div>
@@ -317,14 +197,8 @@
       <h2 class="section-title serif">כלות אמיתיות, שמלות אמיתיות</h2>
       <p class="section-sub">רגעים מהסטודיו — מהמדידה הראשונה ועד ליום החתונה</p>
     </div>
-    <div class="brides-row">
-      <div class="card"><img src="images/bride-1.jpg" alt="שירן"><div class="caption"><div class="name serif">שירן</div><div class="date">12.06.2025</div></div></div>
-      <div class="card"><img src="images/bride-2.jpg" alt="נועה"><div class="caption"><div class="name serif">נועה</div><div class="date">03.09.2025</div></div></div>
-      <div class="card"><img src="images/bride-3.jpg" alt="תמר"><div class="caption"><div class="name serif">תמר</div><div class="date">21.05.2025</div></div></div>
-      <div class="card"><img src="images/bride-4.jpg" alt="רותם"><div class="caption"><div class="name serif">רותם</div><div class="date">17.08.2025</div></div></div>
-      <div class="card"><img src="images/bride-5.jpg" alt="יעל"><div class="caption"><div class="name serif">יעל</div><div class="date">02.10.2025</div></div></div>
-      <div class="card"><img src="images/bride-6.jpg" alt="הדר"><div class="caption"><div class="name serif">הדר</div><div class="date">29.04.2025</div></div></div>
-    </div>
+    <!-- brides come from real_brides in js/site-config.js -->
+    <div class="brides-row" data-brides></div>
   </section>
 
   <!-- ============ MOOD (photos + video slots) ============ -->
@@ -333,17 +207,8 @@
       <span class="section-tag serif">האווירה שלנו.</span>
       <h2 class="section-title serif">רגעים מהעולם של אלכסה</h2>
     </div>
-    <div class="mood-grid">
-      <div class="tile"><img src="images/mood-1.jpg" alt=""></div>
-      <div class="tile"><img src="images/mood-2.jpg" alt=""></div>
-      <div class="tile"><img src="images/mood-3.jpg" alt=""></div>
-      <div class="tile"><img src="images/mood-4.jpg" alt=""></div>
-      <div class="tile"><img src="images/mood-5.jpg" alt=""></div>
-      <div class="tile"><img src="images/mood-6.jpg" alt=""></div>
-      <div class="tile"><img src="images/mood-7.jpg" alt=""></div>
-      <div class="tile"><img src="images/mood-8.jpg" alt=""></div>
-      <div class="tile"><img src="images/mood-9.jpg" alt=""></div>
-    </div>
+    <!-- images come from "moments" in js/site-config.js -->
+    <div class="mood-grid" data-moments></div>
   </section>
 
   <!-- ============ TESTIMONIALS ============ -->
@@ -353,23 +218,8 @@
       <h2 class="section-title serif">מה הכלות שלנו אומרות</h2>
       <p class="section-sub">קטעים מתוך חוות דעת אמיתיות של כלות שמדדו ולקחו</p>
     </div>
-    <div class="testimonial-grid">
-      <div class="card">
-        <div class="stars">✦ ✦ ✦ ✦ ✦</div>
-        <p>הרגשתי שהיא איתי בכל שלב, למדה מה אני רוצה עד שהשמלה יצאה מדויקת בדיוק כמו שדמיינתי.</p>
-        <div class="who">כלה, 2025</div>
-      </div>
-      <div class="card">
-        <div class="stars">✦ ✦ ✦ ✦ ✦</div>
-        <p>נסענו מרחוק ולא התחרטנו לרגע — סטודיו אינטימי, יחס אישי ומחיר שבאמת הגיוני.</p>
-        <div class="who">כלה, 2024</div>
-      </div>
-      <div class="card">
-        <div class="stars">✦ ✦ ✦ ✦ ✦</div>
-        <p>תוך פגישה אחת מצאתי את השמלה, עשינו את ההתאמות ויצאתי איתה הביתה. פשוט וקליל.</p>
-        <div class="who">כלה, 2025</div>
-      </div>
-    </div>
+    <!-- testimonials come from "testimonials" in js/site-config.js -->
+    <div class="testimonial-grid" data-testimonials></div>
   </section>
 
   <!-- ============ INSTAGRAM ============ -->
@@ -379,14 +229,8 @@
       <h2 class="section-title serif"><a href="https://instagram.com/alexa.bridal" target="_blank" rel="noopener" style="color:inherit;">@alexa.bridal</a></h2>
       <p class="section-sub">עקבו אחרינו לעדכונים, שמלות חדשות והשראה</p>
     </div>
-    <div class="ig-grid">
-      <a href="https://instagram.com/alexa.bridal" target="_blank" rel="noopener"><img src="images/ig-1.jpg" alt="פוסט אינסטגרם"></a>
-      <a href="https://instagram.com/alexa.bridal" target="_blank" rel="noopener"><img src="images/ig-2.jpg" alt="פוסט אינסטגרם"></a>
-      <a href="https://instagram.com/alexa.bridal" target="_blank" rel="noopener"><img src="images/ig-3.jpg" alt="פוסט אינסטגרם"></a>
-      <a href="https://instagram.com/alexa.bridal" target="_blank" rel="noopener"><img src="images/ig-4.jpg" alt="פוסט אינסטגרם"></a>
-      <a href="https://instagram.com/alexa.bridal" target="_blank" rel="noopener"><img src="images/ig-5.jpg" alt="פוסט אינסטגרם"></a>
-      <a href="https://instagram.com/alexa.bridal" target="_blank" rel="noopener"><img src="images/ig-6.jpg" alt="פוסט אינסטגרם"></a>
-    </div>
+    <!-- images come from instagram_pics in js/site-config.js -->
+    <div class="ig-grid" data-instagram></div>
   </section>
 
   <!-- ============ FOOTER ============ -->
@@ -408,6 +252,7 @@
     <img src="" alt="">
   </div>
 
+  <script src="js/site-config.js"></script>
   <script src="js/main.js"></script>
 </body>
 </html>
