@@ -318,7 +318,17 @@ section { padding: 54px 6%; }
 /* Studio split */
 .studio-split { padding: 40px 6%; }
 .studio-split .grid { display: grid; grid-template-columns: 1fr 1fr; align-items: center; gap: 30px; max-width: 1100px; margin: 0 auto; }
-.studio-split .section-tag { font-size: clamp(36px, 5vw, 64px); }
+.studio-split .section-tag { font-size: clamp(42px, 5.8vw, 74px); }
+
+/* Unique. TIMELESS. Bold. — each word floats gently, out of phase */
+.studio-words { display: inline-block; direction: ltr; unicode-bidi: isolate; }
+.studio-words .w { display: inline-block; animation: wordFloat 4.2s ease-in-out infinite; }
+.studio-words .w:nth-child(2) { animation-delay: 1.4s; }
+.studio-words .w:nth-child(3) { animation-delay: 2.8s; }
+@keyframes wordFloat {
+  0%, 100% { transform: translateY(0) rotate(0); }
+  50%      { transform: translateY(-9px) rotate(-1.6deg); }
+}
 @media (max-width: 760px) {
   .studio-split .grid { grid-template-columns: 1fr; }
   .studio-split img { max-height: 38vh; }

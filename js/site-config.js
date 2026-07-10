@@ -23,7 +23,13 @@ const SITE = {
     "images/band-1.png",
     "images/band-2.png",
     "images/band-3.png",
-    "images/band-4.png"
+    "images/band-4.png",
+    "images/band-5.png",
+    "images/band-6.png",
+    "images/band-7.png",
+    "images/band-8.png",
+    "images/band-9.png",
+
   ],
 
   // ---------- הקולקציה ----------
