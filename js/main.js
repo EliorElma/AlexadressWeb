@@ -221,17 +221,55 @@ if (menuBtn && mobileMenu) {
 })();
 
 // ---------------------------------------------------------------
-// Collection cards: front/back toggle
+// Collection cards: Front / Back / Detail toggle + zoom lightbox
+// The "Detail" (third) image is optional — if a card has no .img-third,
+// its Detail button is removed automatically. So to add a dress without
+// a third photo, just leave out the <img class="img-third"> line.
 // ---------------------------------------------------------------
-document.querySelectorAll('.dress-card').forEach(card => {
-  const btn = card.querySelector('.fb-toggle');
-  if (!btn) return;
-  btn.addEventListener('click', (e) => {
-    e.preventDefault();
-    e.stopPropagation();
-    const showBack = card.classList.toggle('show-back');
-    btn.querySelectorAll('.seg').forEach(seg => {
-      seg.classList.toggle('active', (seg.dataset.side === 'back') === showBack);
+(function initCollection() {
+  const lb = document.getElementById('lightbox');
+  const lbImg = lb ? lb.querySelector('img') : null;
+
+  function openLightbox(src, alt) {
+    if (!lb) return;
+    lbImg.src = src; lbImg.alt = alt || '';
+    lb.classList.add('open'); lb.setAttribute('aria-hidden', 'false');
+  }
+  function closeLightbox() {
+    if (!lb) return;
+    lb.classList.remove('open'); lb.setAttribute('aria-hidden', 'true');
+    lbImg.src = '';
+  }
+  if (lb) {
+    lb.addEventListener('click', (e) => {
+      if (e.target === lb || e.target.classList.contains('lb-close')) closeLightbox();
+    });
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeLightbox(); });
+  }
+
+  document.querySelectorAll('.dress-card').forEach(card => {
+    const thirdSeg = card.querySelector('.seg[data-side="third"]');
+    if (thirdSeg && !card.querySelector('.img-third')) thirdSeg.remove();
+
+    function show(side) {
+      card.classList.toggle('show-back', side === 'back');
+      card.classList.toggle('show-third', side === 'third');
+      card.querySelectorAll('.seg').forEach(s => s.classList.toggle('active', s.dataset.side === side));
+    }
+    function currentImg() {
+      if (card.classList.contains('show-third')) return card.querySelector('.img-third');
+      if (card.classList.contains('show-back')) return card.querySelector('.img-back');
+      return card.querySelector('.img-front');
+    }
+
+    card.querySelectorAll('.fb-toggle .seg').forEach(seg => {
+      seg.addEventListener('click', (e) => { e.preventDefault(); e.stopPropagation(); show(seg.dataset.side); });
+    });
+    const zoom = card.querySelector('.zoom-btn');
+    if (zoom) zoom.addEventListener('click', (e) => {
+      e.preventDefault(); e.stopPropagation();
+      const img = currentImg();
+      if (img) openLightbox(img.src, img.alt);
     });
   });
-});
+})();
