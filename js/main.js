@@ -17,12 +17,12 @@ const CONFIG = {
 
   // Every dress shown in the collection. slot N maps to images/dress-N.jpg
   dresses: [
-    { name: 'הילה', price: 'עד 3,800 ₪', img: 'images/dress-1.jpg', link: 'https://bridals-il.com/product/הילה/' },
-    { name: 'קים', price: 'עד 3,800 ₪', img: 'images/dress-2.jpg', link: 'https://bridals-il.com/product/קים/' },
-    { name: 'מיקה', price: 'עד 3,800 ₪', img: 'images/dress-3.jpg', link: 'https://bridals-il.com/product/מיקה/' },
-    { name: 'עמית', price: 'עד 3,800 ₪', img: 'images/dress-4.jpg', link: 'https://bridals-il.com/product/עמית/' },
-    { name: 'רומא', price: 'עד 3,800 ₪', img: 'images/dress-5.jpg', link: 'https://bridals-il.com/product/רומא/' },
-    { name: 'פריז', price: 'עד 3,800 ₪', img: 'images/dress-6.jpg', link: 'https://bridals-il.com/product/פריז/' }
+    { name: 'הילה', price: '3,800 ₪', img: 'images/dress-1.jpg', link: 'https://bridals-il.com/product/הילה/' },
+    { name: 'קים', price: '3,800 ₪', img: 'images/dress-2.jpg', link: 'https://bridals-il.com/product/קים/' },
+    { name: 'מיקה', price: '3,800 ₪', img: 'images/dress-3.jpg', link: 'https://bridals-il.com/product/מיקה/' },
+    { name: 'עמית', price: '3,800 ₪', img: 'images/dress-4.jpg', link: 'https://bridals-il.com/product/עמית/' },
+    { name: 'רומא', price: '3,800 ₪', img: 'images/dress-5.jpg', link: 'https://bridals-il.com/product/רומא/' },
+    { name: 'פריז', price: '3,800 ₪', img: 'images/dress-6.jpg', link: 'https://bridals-il.com/product/פריז/' }
   ],
 
   // The 3 quiz questions. Add/remove options freely — just also update
@@ -192,6 +192,32 @@ if (menuBtn && mobileMenu) {
 
   renderDots();
   renderStep();
+})();
+
+// ---------------------------------------------------------------
+// "THE DRESS THAT [YOU] CHOOSES YOU" — drop the word in when scrolled into view
+// ---------------------------------------------------------------
+(function initDropYou() {
+  const band = document.getElementById('dress-band');
+  if (!band) return;
+  let on = false;
+  function check() {
+    const r = band.getBoundingClientRect();
+    const vh = window.innerHeight || document.documentElement.clientHeight;
+    const visible = r.top < vh * 0.8 && r.bottom > vh * 0.2;
+    if (visible && !on) {
+      on = true;
+      band.classList.remove('in-view');   // restart the drop each time it re-enters
+      void band.offsetWidth;              // force reflow
+      band.classList.add('in-view');
+    } else if (!visible && on) {
+      on = false;
+      band.classList.remove('in-view');
+    }
+  }
+  window.addEventListener('scroll', check, { passive: true });
+  window.addEventListener('resize', check);
+  check();
 })();
 
 // ---------------------------------------------------------------

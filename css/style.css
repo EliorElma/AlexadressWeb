@@ -92,8 +92,8 @@ a:hover { color: var(--accent); }
 
 /* ---------- Hero ---------- */
 .hero {
-  min-height: 100vh; display: grid; grid-template-columns: 1fr 1.05fr;
-  align-items: center; gap: 56px; padding: 180px 6% 70px;
+  min-height: 92vh; display: grid; grid-template-columns: 1fr 1.05fr;
+  align-items: center; gap: 56px; padding: 150px 6% 24px;
 }
 .hero-copy { text-align: right; }
 .hero-copy h1 {
@@ -125,17 +125,17 @@ a:hover { color: var(--accent); }
 .hero-quiz-badge .txt b { display: block; font-weight: 700; }
 
 @media (max-width: 760px) {
-  .hero { grid-template-columns: 1fr; gap: 36px; padding: 128px 6% 70px; }
+  .hero { grid-template-columns: 1fr; gap: 30px; padding: 110px 6% 20px; min-height: 0; }
 }
 
 /* ---------- Marquee photo band ---------- */
 .photo-band {
-  position: relative; overflow: hidden; min-height: 70vh; display: flex;
-  align-items: center; justify-content: center; background: var(--bg-alt); padding: 60px 0;
+  position: relative; overflow: hidden; min-height: 58vh; display: flex;
+  align-items: center; justify-content: center; background: transparent; padding: 34px 0;
 }
 .photo-band .layer { position: absolute; inset: 0; width: 100%; overflow: hidden; display: flex; }
 .photo-band .layer.back { z-index: 1; align-items: center; }
-.photo-band .layer.back .track { animation: marquee 30s linear infinite; }
+.photo-band .layer.back .track { animation: marquee 34s linear infinite; }
 .photo-band .track { display: flex; align-items: center; width: max-content; }
 .photo-band .card {
   width: 300px; aspect-ratio: 2/3; margin-inline-start: 16px; flex: 0 0 auto;
@@ -143,24 +143,52 @@ a:hover { color: var(--accent); }
 }
 .photo-band .card img { width: 100%; height: 100%; object-fit: cover; display: block; }
 .photo-band .big-words {
-  position: relative; z-index: 5; text-align: center; line-height: 1.3;
+  position: relative; z-index: 5; text-align: center; line-height: 1.25;
   font-weight: 700; font-style: italic; letter-spacing: .01em;
-  font-size: clamp(28px, 4.8vw, 64px);
-  text-shadow: 0 0 3px var(--bg-alt), 0 0 14px var(--bg-alt), 0 0 28px var(--bg-alt);
+  font-size: clamp(36px, 6.4vw, 90px);
+  text-shadow: 0 0 4px var(--bg), 0 0 16px var(--bg), 0 0 30px var(--bg), 0 0 46px var(--bg);
   padding: 0 6%; pointer-events: none;
 }
 .big-words .hl { color: var(--accent); }
 
+/* cutout marquee (top band): big transparent people floating on the page bg */
+.photo-band.cutout { min-height: 80vh; padding: 20px 0 10px; }
+.photo-band.cutout .layer.back .track { animation-duration: 42s; }
+.photo-band.cutout .card {
+  width: auto; height: 66vh; max-height: 640px; aspect-ratio: auto;
+  margin-inline-start: 52px; background: none; box-shadow: none;
+  border-radius: 0; overflow: visible;
+}
+.photo-band.cutout .card img {
+  width: auto; height: 100%; object-fit: contain;
+  filter: drop-shadow(0 22px 34px rgba(74,59,44,.20));
+}
+
+/* "the dress that ... YOU" drop-in */
+.drop-you { display: inline-block; color: var(--accent); }
+.photo-band .drop-you { opacity: 0; transform: translateY(-150%) rotate(-14deg); }
+.photo-band.in-view .drop-you { animation: dropYou 1.15s cubic-bezier(.6,.02,.62,1.2) forwards; }
+@keyframes dropYou {
+  0%   { opacity: 0; transform: translateY(-150%) rotate(-14deg); }
+  55%  { opacity: 1; transform: translateY(14%)   rotate(7deg);  }
+  74%  { transform: translateY(-5%) rotate(-4deg); }
+  100% { opacity: 1; transform: translateY(5px)  rotate(-5deg); }
+}
+
 @media (max-width: 760px) {
   .photo-band .card { width: 190px; }
+  .photo-band.cutout .card { width: auto; height: 46vh; max-height: 380px; margin-inline-start: 26px; }
 }
 
 /* ---------- Sections shared ---------- */
-section { padding: 90px 6%; }
-.section-tag { display: block; font-weight: 700; font-style: italic; font-size: clamp(22px, 2.8vw, 32px); color: var(--accent); margin-bottom: 10px; }
+section { padding: 54px 6%; }
+.section-tag { display: block; font-weight: 700; font-style: italic; font-size: clamp(22px, 2.8vw, 32px); color: var(--accent); margin-bottom: 8px; }
 .section-title { font-weight: 500; font-size: clamp(24px, 3.4vw, 34px); margin: 0; color: var(--ink-dark); }
-.section-sub { color: var(--muted); margin-top: 10px; }
-.section-head { text-align: center; margin-bottom: 50px; }
+.section-sub { color: var(--muted); margin-top: 8px; }
+.section-head { text-align: center; margin-bottom: 32px; }
+
+/* "Hand Made with love" accent word */
+.love { color: var(--accent); font-family: 'David Libre', serif; font-style: italic; font-weight: 700; }
 
 /* USPs */
 .usp-grid { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: repeat(4,1fr); gap: 36px; }
@@ -211,7 +239,7 @@ section { padding: 90px 6%; }
 .quiz-result-dresses img { width: 100%; aspect-ratio: 3/4; object-fit: cover; border-radius: 6px; margin-bottom: 8px; display: block; }
 
 /* Divider */
-.divider { display: flex; align-items: center; justify-content: center; gap: 20px; padding: 36px 6%; }
+.divider { display: flex; align-items: center; justify-content: center; gap: 20px; padding: 20px 6%; }
 .divider .line { flex: 1; max-width: 200px; border-top: 2px solid var(--ink); opacity: .15; }
 .divider .word { font-weight: 700; font-style: italic; font-size: clamp(28px, 4vw, 48px); letter-spacing: .01em; }
 
@@ -262,18 +290,25 @@ section { padding: 90px 6%; }
 .brides-row .card .caption .name { font-family: 'David Libre', serif; font-size: 18px; color: var(--cream); margin-bottom: 2px; }
 .brides-row .card .caption .date { font-size: 12px; letter-spacing: .1em; color: var(--cream); opacity: .8; }
 
-.mood-grid { flex-wrap: wrap; max-width: 1300px; margin: 0 auto; }
-.mood-grid .tile { width: 220px; aspect-ratio: 1/1; border-radius: 6px; overflow: hidden; box-shadow: 0 18px 40px rgba(74,59,44,.18); transition: transform .3s ease; flex: 0 0 auto; }
-.mood-grid .tile:hover { transform: scale(1.05); }
-.mood-grid .tile img { width: 100%; height: 100%; object-fit: cover; display: block; }
-.mood-grid .tile.video-slot {
-  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px;
-  background: repeating-linear-gradient(135deg, #DCCBAE, #DCCBAE 10px, #D2BFA0 10px, #D2BFA0 20px);
-  color: #6B5645;
+/* Mood — messy horizontal collage (scrolls on mobile, never a plain column) */
+.mood-grid {
+  flex-wrap: nowrap; overflow-x: auto; align-items: center;
+  gap: 0; padding: 46px 6% 54px; max-width: none;
+  scrollbar-width: none; -ms-overflow-style: none;
 }
-.mood-grid .tile.video-slot .play { font-size: 22px; }
-.mood-grid .tile.video-slot .label { font-family: ui-monospace, monospace; font-size: 10.5px; text-align: center; padding: 0 10px; }
-.mood-grid video { width: 100%; height: 100%; object-fit: cover; display: block; }
+.mood-grid::-webkit-scrollbar { display: none; }
+.mood-grid .tile {
+  flex: 0 0 auto; border-radius: 8px; overflow: hidden;
+  box-shadow: 0 20px 44px rgba(74,59,44,.22); transition: transform .35s ease;
+  background: var(--bg-alt);
+}
+.mood-grid .tile img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.mood-grid .tile:nth-child(1) { width: 250px; aspect-ratio: 3/4; transform: rotate(-4deg); }
+.mood-grid .tile:nth-child(2) { width: 300px; aspect-ratio: 4/5; transform: rotate(3deg) translateY(24px); margin-inline-start: -22px; z-index: 2; }
+.mood-grid .tile:nth-child(3) { width: 230px; aspect-ratio: 1/1;  transform: rotate(-2deg) translateY(-16px); margin-inline-start: -14px; }
+.mood-grid .tile:nth-child(4) { width: 290px; aspect-ratio: 4/5; transform: rotate(5deg) translateY(14px); margin-inline-start: -18px; z-index: 2; }
+.mood-grid .tile:nth-child(5) { width: 250px; aspect-ratio: 3/4; transform: rotate(-3deg) translateY(-10px); margin-inline-start: -16px; }
+.mood-grid .tile:hover { transform: scale(1.05) rotate(0deg); z-index: 5; }
 
 /* Testimonials */
 .testimonials-section { background: var(--ink); color: var(--bg-alt); }
