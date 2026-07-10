@@ -200,19 +200,15 @@ if (menuBtn && mobileMenu) {
 (function initDropYou() {
   const band = document.getElementById('dress-band');
   if (!band) return;
-  let on = false;
+  // Play the sequence ONCE when the band first becomes visible, and never
+  // reset it — small scroll jitters must not restart/hide the animation.
   function check() {
     const r = band.getBoundingClientRect();
     const vh = window.innerHeight || document.documentElement.clientHeight;
-    const visible = r.top < vh * 0.8 && r.bottom > vh * 0.2;
-    if (visible && !on) {
-      on = true;
-      band.classList.remove('in-view');   // restart the drop each time it re-enters
-      void band.offsetWidth;              // force reflow
+    if (r.top < vh * 0.85 && r.bottom > vh * 0.1) {
       band.classList.add('in-view');
-    } else if (!visible && on) {
-      on = false;
-      band.classList.remove('in-view');
+      window.removeEventListener('scroll', check);
+      window.removeEventListener('resize', check);
     }
   }
   window.addEventListener('scroll', check, { passive: true });

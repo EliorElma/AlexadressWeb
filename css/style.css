@@ -168,7 +168,7 @@ a:hover { color: var(--accent); }
 
 /* "the dress that YOU ..." — the word slips and FALLS OUT of the line */
 .drop-you { display: inline-block; position: relative; color: var(--accent); --fall: 1.4em; }
-.photo-band.in-view .drop-you { animation: dropYou 1.45s cubic-bezier(.45,0,.7,1) forwards; }
+.photo-band.in-view .drop-you { animation: dropYou 1.05s cubic-bezier(.45,0,.7,1) forwards; }
 @keyframes dropYou {
   0%, 14% { transform: translateY(0) rotate(0); }
   62%     { transform: translateY(calc(var(--fall) * 1.3)) rotate(-20deg); }
@@ -181,14 +181,14 @@ a:hover { color: var(--accent); }
   content: ''; position: absolute; left: -12%; top: 46%; width: 124%; height: .09em;
   background: var(--ink-dark); border-radius: 3px; opacity: 0; z-index: 2;
 }
-.photo-band.in-view .drop-you::before { animation: xMark1 .28s ease 1.55s forwards; }
-.photo-band.in-view .drop-you::after  { animation: xMark2 .28s ease 1.78s forwards; }
+.photo-band.in-view .drop-you::before { animation: xMark1 .24s ease 1.1s forwards; }
+.photo-band.in-view .drop-you::after  { animation: xMark2 .24s ease 1.28s forwards; }
 @keyframes xMark1 { from { opacity: 0; transform: rotate(24deg) scaleX(0); } to { opacity: 1; transform: rotate(24deg) scaleX(1); } }
 @keyframes xMark2 { from { opacity: 0; transform: rotate(-24deg) scaleX(0); } to { opacity: 1; transform: rotate(-24deg) scaleX(1); } }
 
 /* ...and while the X is drawn, the correct YOU fades in, growing brighter */
 .photo-band .big-words .hl { display: inline-block; }
-.photo-band.in-view .big-words .hl { animation: youReveal 2.4s ease 1.55s both; }
+.photo-band.in-view .big-words .hl { animation: youReveal 1.5s ease 1.1s both; }
 @keyframes youReveal { from { opacity: 0; } 60% { opacity: .45; } to { opacity: 1; } }
 
 @media (max-width: 760px) {
