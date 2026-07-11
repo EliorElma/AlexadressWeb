@@ -75,8 +75,9 @@ a:hover { color: var(--accent); }
   position: fixed; top: 84px; left: 0; right: 0; z-index: 99;
   background: var(--ink); overflow: hidden; padding: 9px 0; direction: ltr;
 }
-/* direction:ltr anchors the track to the LEFT so the -50% loop never opens a gap (page is RTL) */
-.ticker-track { display: flex; white-space: nowrap; animation: marquee 24s linear infinite; width: max-content; direction: ltr; }
+/* direction:ltr anchors the track to the LEFT so the -50% loop never opens a gap (page is RTL).
+   reverse = the Hebrew text moves rightward, matching its reading direction. */
+.ticker-track { display: flex; white-space: nowrap; animation: marquee 24s linear infinite reverse; width: max-content; direction: ltr; }
 .ticker-track span.item {
   color: var(--bg-alt); font-size: 13px; font-weight: 500; letter-spacing: .06em;
   padding: 0 24px; display: inline-flex; align-items: center; gap: 24px;
