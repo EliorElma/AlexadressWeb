@@ -137,18 +137,12 @@ const SITE = {
 
   // ---------- הרצועה הנעה מאחורי THE DRESS THAT YOU... ----------
   "second_band": [
-    "images/dress-1.jpg",
-    "images/bride-1.jpg",
-    "images/dress-2.jpg",
-    "images/bride-2.jpg",
-    "images/dress-3.jpg",
-    "images/bride-3.jpg",
-    "images/dress-4.jpg",
-    "images/bride-4.jpg",
-    "images/dress-5.jpg",
-    "images/bride-5.jpg",
-    "images/dress-6.jpg",
-    "images/bride-6.jpg"
+    "images/second-band-1.jpg",
+    "images/second-band-2.jpg",
+    "images/second-band-3.jpg",
+    "images/second-band-4.jpg",
+    "images/second-band-5.jpg",
+    "images/second-band-6.jpg"
   ],
 
   // ---------- כלות אמיתיות ----------
