@@ -367,9 +367,14 @@ if (menuBtn && mobileMenu) {
   const lb = document.getElementById('lightbox');
   const lbImg = lb ? lb.querySelector('img') : null;
 
+  // Collection thumbnails are small (fast grid loading); the "-full" file
+  // next to them is a sharper version made for zooming. If it doesn't
+  // exist for some image, fall back to the thumbnail automatically.
   function openLightbox(src, alt) {
     if (!lb) return;
-    lbImg.src = src; lbImg.alt = alt || '';
+    const fullSrc = src.replace(/\.(jpe?g)$/i, '-full.$1');
+    lbImg.onerror = () => { lbImg.onerror = null; lbImg.src = src; };
+    lbImg.src = fullSrc; lbImg.alt = alt || '';
     lb.classList.add('open'); lb.setAttribute('aria-hidden', 'false');
   }
   function closeLightbox() {
