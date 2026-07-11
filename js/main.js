@@ -16,15 +16,21 @@ if (typeof SITE === 'undefined') {
 // "first" is the very first thing on the page, so it loads eagerly;
 // "second" is far down the page, so its images lazy-load.
 // ---------------------------------------------------------------
-function fillBand(name, imgs, lazy) {
+function fillBand(name, imgs, lazy, priorityCount) {
   const track = document.querySelector('[data-band="' + name + '"]');
   if (!track || !imgs || !imgs.length) return;
   const loadAttr = lazy ? ' loading="lazy" decoding="async"' : ' decoding="async"';
   track.innerHTML = imgs.concat(imgs)
-    .map(src => '<div class="card"><img src="' + src + '" alt=""' + loadAttr + '></div>')
+    .map((src, i) => {
+      const priority = priorityCount && i < priorityCount ? ' fetchpriority="high"' : '';
+      return '<div class="card"><img src="' + src + '" alt=""' + loadAttr + priority + '></div>';
+    })
     .join('');
 }
-fillBand('first', SITE.first_band, false);
+// the first 2 cards of the top band are also written statically in index.html
+// (PageSpeed "LCP request discovery" — see the comment there); keep the same
+// fetchpriority here so it survives this rebuild.
+fillBand('first', SITE.first_band, false, 2);
 fillBand('second', SITE.second_band, true);
 
 // ---------------------------------------------------------------

@@ -107,10 +107,19 @@
   </div>
 
   <!-- ============ PHOTO BAND 1 (cutout marquee — above the hero) ============ -->
-  <!-- images come from first_band in js/site-config.js -->
+  <!-- images come from first_band in js/site-config.js. The first 2 cards are
+       also written here as real <img> tags (PageSpeed: "LCP request discovery")
+       — this is the tallest thing on the page now that it sits above the hero,
+       so the browser needs to see it in the raw HTML to fetch it immediately,
+       not wait for main.js to build it. main.js rebuilds the full track on top
+       of this (same URLs = the browser reuses what it already fetched); keep
+       these two in sync with first_band[0] and [1] if you reorder that list. -->
   <div class="photo-band cutout">
     <div class="layer back">
-      <div class="track" data-band="first"></div>
+      <div class="track" data-band="first">
+        <div class="card"><img src="images/band-2.webp" alt="" fetchpriority="high" decoding="async"></div>
+        <div class="card"><img src="images/band-3.webp" alt="" fetchpriority="high" decoding="async"></div>
+      </div>
     </div>
     <div class="big-words serif">FALL <span class="hl">IN LOVE.</span> TAKE IT HOME</div>
   </div>
