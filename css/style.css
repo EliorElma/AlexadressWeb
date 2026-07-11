@@ -116,6 +116,19 @@ a:hover { color: var(--accent); }
 }
 .btn-outline:hover { background: var(--ink); color: var(--bg-alt); }
 
+/* magnetic pull — JS sets the transform on mousemove, this just smooths it */
+.hero-actions .btn-solid, .hero-actions .btn-outline { transition: transform .15s ease; }
+
+/* custom cursor over the collection cards (desktop with a real mouse only) */
+.custom-cursor {
+  position: fixed; top: 0; left: 0; width: 34px; height: 34px; border-radius: 50%;
+  background: var(--accent); color: var(--cream); display: flex; align-items: center;
+  justify-content: center; font-size: 14px; pointer-events: none; z-index: 300;
+  opacity: 0; transform: translate(-50%,-50%); transition: opacity .15s ease;
+}
+.custom-cursor.show { opacity: 1; }
+body.custom-cursor-active .dress-card, body.custom-cursor-active .dress-card * { cursor: none; }
+
 .hero-media { position: relative; aspect-ratio: 4/5; max-height: 56vh; margin-inline: auto; }
 .hero-media img { width: 100%; height: 100%; object-fit: cover; border-radius: 6px; display: block; }
 .hero-quiz-badge {
@@ -379,7 +392,7 @@ section { padding: 54px 6%; }
   box-shadow: 0 20px 44px rgba(74,59,44,.22); transition: transform .35s ease;
   background: var(--bg-alt);
 }
-.mood-grid .tile img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.mood-grid .tile img, .mood-grid .tile video { width: 100%; height: 100%; object-fit: cover; display: block; }
 .mood-grid .tile:nth-child(5n+1) { width: 250px; aspect-ratio: 3/4; transform: rotate(-4deg); }
 .mood-grid .tile:nth-child(5n+2) { width: 300px; aspect-ratio: 4/5; transform: rotate(3deg) translateY(24px); margin-inline-start: -22px; z-index: 2; }
 .mood-grid .tile:nth-child(5n+3) { width: 230px; aspect-ratio: 1/1;  transform: rotate(-2deg) translateY(-16px); margin-inline-start: -14px; }

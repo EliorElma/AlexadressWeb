@@ -158,14 +158,15 @@ const SITE = {
   ],
 
   // ---------- רגעים מהעולם של אלכסה (הקולאז') ----------
+  // כל פריט הוא תמונה (מחרוזת) או וידאו (אובייקט עם video + poster).
   "moments": [
     "images/mood-1.jpg",
     "images/mood-2.jpg",
-    "images/mood-3.jpg",
+    { "video": "images/moment-video-1.mp4", "poster": "images/moment-video-1-poster.jpg" },
     "images/mood-4.jpg",
     "images/mood-5.jpg",
     "images/mood-6.jpg",
-    "images/mood-7.jpg",
+    { "video": "images/moment-video-2.mp4", "poster": "images/moment-video-2-poster.jpg" },
     "images/mood-8.jpg",
     "images/mood-9.jpg"
   ],

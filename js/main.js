@@ -78,9 +78,44 @@ if (heroImg && SITE.head_pic) heroImg.src = SITE.head_pic;
 (function renderMoments() {
   const grid = document.querySelector('[data-moments]');
   if (!grid) return;
-  grid.innerHTML = SITE.moments.map(src =>
-    '<div class="tile"><img src="' + src + '" alt="" loading="lazy" decoding="async"></div>'
-  ).join('');
+  grid.innerHTML = SITE.moments.map(item => {
+    if (item && typeof item === 'object' && item.video) {
+      // no src yet — stays unloaded until it scrolls into view (see initLazyVideos)
+      return '<div class="tile">' +
+        '<video data-src="' + item.video + '" poster="' + (item.poster || '') + '"' +
+        ' muted loop playsinline preload="none"></video>' +
+        '</div>';
+    }
+    return '<div class="tile"><img src="' + item + '" alt="" loading="lazy" decoding="async"></div>';
+  }).join('');
+})();
+
+// ---------------------------------------------------------------
+// Lazy-load moments videos: only fetch + play once the tile is
+// actually visible, same spirit as loading="lazy" on the images.
+// ---------------------------------------------------------------
+(function initLazyVideos() {
+  const videos = document.querySelectorAll('[data-moments] video[data-src]');
+  if (!videos.length) return;
+  function load(video) {
+    video.src = video.dataset.src;
+    video.removeAttribute('data-src');
+    video.load();
+    video.play().catch(() => {});
+  }
+  if (!('IntersectionObserver' in window)) {
+    videos.forEach(load);
+    return;
+  }
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        load(entry.target);
+        obs.unobserve(entry.target);
+      }
+    });
+  }, { rootMargin: '200px' });
+  videos.forEach(v => obs.observe(v));
 })();
 
 // ---------------------------------------------------------------
@@ -410,5 +445,49 @@ if (menuBtn && mobileMenu) {
       const img = currentImg();
       if (img) openLightbox(img.src, img.alt);
     });
+  });
+})();
+
+// ---------------------------------------------------------------
+// Custom cursor over the collection cards — desktop with a real mouse
+// only (touch devices keep their normal tap behavior untouched).
+// ---------------------------------------------------------------
+(function initCustomCursor() {
+  if (!window.matchMedia('(hover: hover) and (pointer: fine)').matches) return;
+  const grid = document.querySelector('[data-collection]');
+  if (!grid) return;
+
+  const dot = document.createElement('div');
+  dot.className = 'custom-cursor';
+  dot.textContent = '✦';
+  document.body.appendChild(dot);
+
+  grid.addEventListener('mousemove', (e) => {
+    dot.style.left = e.clientX + 'px';
+    dot.style.top = e.clientY + 'px';
+    const overCard = !!e.target.closest('.dress-card');
+    dot.classList.toggle('show', overCard);
+    document.body.classList.toggle('custom-cursor-active', overCard);
+  });
+  grid.addEventListener('mouseleave', () => {
+    dot.classList.remove('show');
+    document.body.classList.remove('custom-cursor-active');
+  });
+})();
+
+// ---------------------------------------------------------------
+// Magnetic pull on the hero's two buttons — desktop with a real
+// mouse only.
+// ---------------------------------------------------------------
+(function initMagneticButtons() {
+  if (!window.matchMedia('(hover: hover) and (pointer: fine)').matches) return;
+  document.querySelectorAll('.hero-actions .btn-solid, .hero-actions .btn-outline').forEach((btn) => {
+    btn.addEventListener('mousemove', (e) => {
+      const r = btn.getBoundingClientRect();
+      const dx = (e.clientX - (r.left + r.width / 2)) * 0.3;
+      const dy = (e.clientY - (r.top + r.height / 2)) * 0.3;
+      btn.style.transform = 'translate(' + dx + 'px,' + dy + 'px)';
+    });
+    btn.addEventListener('mouseleave', () => { btn.style.transform = ''; });
   });
 })();
