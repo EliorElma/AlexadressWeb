@@ -1,10 +1,10 @@
 /* ===================================================================
    Alexa Bridal — stylesheet
    Palette:  bg #EAE3D6 / #F6F1E9   ink #4A3B2C   accent #A9714B
-   Fonts:    David Libre (headlines), Heebo (body)
+   Fonts:    David Libre (headlines), Rubik (body — rounder, friendlier)
+   Fonts are loaded via <link> in index.html <head> (not @import here) —
+   @import blocks CSS parsing and delays first paint.
    =================================================================== */
-
-@import url('https://fonts.googleapis.com/css2?family=David+Libre:ital,wght@0,400;0,500;0,700;1,400&family=Heebo:wght@300;400;500;600;700&display=swap');
 
 :root {
   --bg: #EAE3D6;
@@ -23,7 +23,7 @@ html { scroll-behavior: smooth; }
 
 body {
   margin: 0;
-  font-family: 'Heebo', sans-serif;
+  font-family: 'Rubik', sans-serif;
   color: var(--ink);
   background: var(--bg);
   background-image: repeating-linear-gradient(135deg, rgba(0,0,0,.012) 0px, rgba(0,0,0,.012) 1px, transparent 1px, transparent 7px);
@@ -45,11 +45,11 @@ a:hover { color: var(--accent); }
 .site-header {
   position: fixed; top: 0; left: 0; right: 0; z-index: 100;
   display: flex; align-items: center; justify-content: space-between;
-  padding: 16px 6%; height: 84px; box-sizing: border-box;
+  padding: 14px 6%; height: 92px; box-sizing: border-box;
   background: rgba(246,241,233,.9); backdrop-filter: blur(10px);
   border-bottom: 1px solid var(--border);
 }
-.site-header .logo img { height: 52px; width: auto; display: block; }
+.site-header .logo img { height: 64px; width: auto; display: block; }
 .site-nav { display: flex; gap: 32px; font-size: 14px; color: #6B5D4C; }
 .header-cta {
   background: var(--accent); color: var(--cream); padding: 11px 24px;
@@ -62,7 +62,7 @@ a:hover { color: var(--accent); }
   width: 40px; height: 40px; font-size: 19px; color: var(--ink); cursor: pointer;
 }
 .mobile-menu {
-  position: fixed; top: 84px; left: 0; right: 0; z-index: 98;
+  position: fixed; top: 92px; left: 0; right: 0; z-index: 98;
   background: var(--bg-alt); border-bottom: 1px solid var(--border);
   padding: 18px 6% 26px; display: none; flex-direction: column; gap: 18px;
   box-shadow: 0 20px 40px rgba(74,59,44,.15); text-align: right;
@@ -72,24 +72,25 @@ a:hover { color: var(--accent); }
 .mobile-menu .header-cta { padding: 13px; text-align: center; }
 
 .ticker {
-  position: fixed; top: 84px; left: 0; right: 0; z-index: 99;
-  background: var(--ink); overflow: hidden; padding: 9px 0; direction: ltr;
+  position: fixed; top: 92px; left: 0; right: 0; z-index: 99;
+  background: var(--bg-alt); overflow: hidden; padding: 9px 0; direction: ltr;
+  border-bottom: 1px solid var(--border);
 }
 /* direction:ltr anchors the track to the LEFT so the -50% loop never opens a gap (page is RTL).
    reverse = the Hebrew text moves rightward, matching its reading direction. */
 .ticker-track { display: flex; white-space: nowrap; animation: marquee 24s linear infinite reverse; width: max-content; direction: ltr; }
 .ticker-track span.item {
-  color: var(--bg-alt); font-size: 13px; font-weight: 500; letter-spacing: .06em;
+  color: #000; font-size: 13px; font-weight: 500; letter-spacing: .06em;
   padding: 0 24px; display: inline-flex; align-items: center; gap: 24px;
 }
 .ticker-track .dot { color: var(--accent); font-size: 9px; }
 
 @media (max-width: 760px) {
-  .site-header { height: 64px; padding: 10px 5%; }
-  .site-header .logo img { height: 38px; }
+  .site-header { height: 68px; padding: 8px 5%; }
+  .site-header .logo img { height: 50px; }
   .site-nav, .header-cta { display: none; }
   .menu-btn { display: flex; }
-  .mobile-menu, .ticker { top: 64px; }
+  .mobile-menu, .ticker { top: 68px; }
 }
 
 /* ---------- Hero ---------- */
@@ -156,7 +157,7 @@ a:hover { color: var(--accent); }
 .big-words .hl { color: var(--accent); }
 
 /* cutout marquee (top band): big transparent people floating on the page bg */
-.photo-band.cutout { min-height: 54vh; padding: 10px 0; margin-top: 124px; }
+.photo-band.cutout { min-height: 54vh; padding: 10px 0; margin-top: 132px; }
 .photo-band.cutout .layer.back .track { animation-duration: 75s; }
 .photo-band.cutout .card {
   width: auto; height: 54vh; max-height: 540px; aspect-ratio: auto;
@@ -195,7 +196,7 @@ a:hover { color: var(--accent); }
 
 @media (max-width: 760px) {
   .photo-band .card { width: 190px; }
-  .photo-band.cutout { margin-top: 100px; }
+  .photo-band.cutout { margin-top: 108px; }
   .photo-band.cutout .card { width: auto; height: 40vh; max-height: 360px; margin-inline-start: 10px; }
 }
 
@@ -245,14 +246,23 @@ section { padding: 54px 6%; }
 @media (max-width: 760px) { .quiz-options { grid-template-columns: 1fr; } }
 .quiz-options button {
   border: 1.5px solid rgba(74,59,44,.18); background: transparent; color: var(--ink);
-  padding: 18px 10px; border-radius: 14px; font-family: 'Heebo', sans-serif;
+  padding: 18px 10px; border-radius: 14px; font-family: 'Rubik', sans-serif;
   font-size: 15px; cursor: pointer;
 }
 .quiz-options button.selected { border-color: var(--accent); color: var(--accent); background: rgba(169,113,75,.08); }
-.quiz-form input {
+[data-quiz-form] input {
   width: 100%; padding: 14px 16px; margin-bottom: 14px; border: 1.5px solid var(--border);
-  border-radius: 12px; font-family: 'Heebo', sans-serif; font-size: 15px; background: #fff; box-sizing: border-box;
+  border-radius: 12px; font-family: 'Rubik', sans-serif; font-size: 15px; background: #fff; box-sizing: border-box;
 }
+.quiz-date-label { display: block; text-align: start; margin-bottom: 14px; }
+.quiz-date-label span { display: block; font-size: 13px; color: var(--muted); margin-bottom: 6px; }
+.quiz-date-label input { margin-bottom: 0 !important; color: var(--ink); }
+
+/* Simple lead form (alternative to the quiz) */
+.simple-lead { max-width: 420px; width: 100%; margin: 40px auto 0; text-align: center; }
+.simple-lead [data-simple-lead-form] { margin-top: 22px; text-align: start; }
+.simple-lead [data-simple-lead-form] input { width: 100%; padding: 14px 16px; margin-bottom: 14px; border: 1.5px solid var(--border); border-radius: 12px; font-family: 'Rubik', sans-serif; font-size: 15px; background: #fff; box-sizing: border-box; }
+.simple-lead [data-simple-lead-form] button { width: 100%; }
 .quiz-result-dresses { display: flex; gap: 18px; justify-content: center; margin-bottom: 28px; flex-wrap: wrap; }
 .quiz-result-dresses figure { width: 100px; margin: 0; text-align: center; font-size: 13px; color: var(--muted); }
 .quiz-result-dresses img { width: 100%; aspect-ratio: 3/4; object-fit: cover; border-radius: 6px; margin-bottom: 8px; display: block; }
@@ -301,7 +311,7 @@ section { padding: 54px 6%; }
   position: absolute; top: 14px; inset-inline-start: 14px; z-index: 2;
   display: flex; background: rgba(74,59,44,.55); backdrop-filter: blur(3px);
   border-radius: 20px; border: 0; padding: 3px; cursor: pointer; overflow: hidden;
-  font-family: 'Heebo', sans-serif;
+  font-family: 'Rubik', sans-serif;
 }
 .fb-toggle .seg {
   padding: 6px 13px; font-size: 10.5px; letter-spacing: .06em; color: rgba(255,246,238,.75);
@@ -328,16 +338,16 @@ section { padding: 54px 6%; }
 /* Studio split */
 .studio-split { padding: 40px 6%; }
 .studio-split .grid { display: grid; grid-template-columns: 1fr 1fr; align-items: center; gap: 30px; max-width: 1100px; margin: 0 auto; }
-.studio-split .section-tag { font-size: clamp(42px, 5.8vw, 74px); }
+.studio-split .section-tag { font-size: clamp(22px, 3.2vw, 38px); line-height: 1.5; }
 
-/* Unique. TIMELESS. Bold. — each word floats gently, out of phase */
+/* ELEGANT. EFFORTLESS. YOU. ... — each word floats gently, out of phase.
+   Stagger is driven by --i (set inline on each .w), so it works for any
+   number of words without touching this CSS. */
 .studio-words { display: inline-block; direction: ltr; unicode-bidi: isolate; }
-.studio-words .w { display: inline-block; animation: wordFloat 4.2s ease-in-out infinite; }
-.studio-words .w:nth-child(2) { animation-delay: 1.4s; }
-.studio-words .w:nth-child(3) { animation-delay: 2.8s; }
+.studio-words .w { display: inline-block; animation: wordFloat 4.2s ease-in-out infinite; animation-delay: calc(var(--i, 0) * 0.35s); }
 @keyframes wordFloat {
   0%, 100% { transform: translateY(0) rotate(0); }
-  50%      { transform: translateY(-9px) rotate(-1.6deg); }
+  50%      { transform: translateY(-7px) rotate(-1.2deg); }
 }
 @media (max-width: 760px) {
   .studio-split .grid { grid-template-columns: 1fr; }

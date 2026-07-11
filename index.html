@@ -3,10 +3,50 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>אלכסה בריידל | בוטיק שמלות כלה Ready to Wear · בנימינה</title>
-<meta name="description" content="בוטיק שמלות כלה Ready to Wear בבנימינה. כל השמלות חדשות, תפורות ביד ומוכנות ללבישה כבר עכשיו — במחיר אחיד של 3,800 ₪.">
+<title>אלכסה בריידל | בוטיק שמלות כלה Ready to Wear · חדרה</title>
+<meta name="description" content="בוטיק שמלות כלה Ready to Wear בחדרה. כל השמלות חדשות, תפורות ביד ומוכנות ללבישה כבר עכשיו — במחיר אחיד של 3,800 ₪.">
+
+<!-- Canonical + social sharing (og:*). SITE_URL: update this if/when a custom domain is connected. -->
+<link rel="canonical" href="https://alexabridal.netlify.app/">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="he_IL">
+<meta property="og:site_name" content="אלכסה בריידל">
+<meta property="og:title" content="אלכסה בריידל | בוטיק שמלות כלה Ready to Wear · חדרה">
+<meta property="og:description" content="בוטיק שמלות כלה Ready to Wear בחדרה. כל השמלות חדשות, תפורות ביד ומוכנות ללבישה כבר עכשיו — במחיר אחיד של 3,800 ₪.">
+<meta property="og:url" content="https://alexabridal.netlify.app/">
+<meta property="og:image" content="https://alexabridal.netlify.app/images/hero.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="אלכסה בריידל | בוטיק שמלות כלה Ready to Wear · חדרה">
+<meta name="twitter:description" content="בוטיק שמלות כלה Ready to Wear בחדרה. כל השמלות חדשות, תפורות ביד ומוכנות ללבישה כבר עכשיו — במחיר אחיד של 3,800 ₪.">
+<meta name="twitter:image" content="https://alexabridal.netlify.app/images/hero.jpg">
+
 <link rel="icon" href="images/logo.png">
+
+<!-- Fonts: preconnect + <link> (not @import) so they don't block first render -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=David+Libre:ital,wght@0,400;0,500;0,700;1,400&family=Rubik:wght@300;400;500;600;700&display=swap">
+
 <link rel="stylesheet" href="css/style.css">
+
+<!-- Structured data for Google (local business) -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "ClothingStore",
+  "name": "אלכסה בריידל",
+  "image": "https://alexabridal.netlify.app/images/hero.jpg",
+  "url": "https://alexabridal.netlify.app/",
+  "telephone": "+972544806554",
+  "priceRange": "₪₪",
+  "address": {
+    "@type": "PostalAddress",
+    "addressLocality": "חדרה",
+    "addressCountry": "IL"
+  },
+  "sameAs": ["https://instagram.com/alexa.bridal"]
+}
+</script>
 </head>
 <body>
 
@@ -20,7 +60,7 @@
       <a href="#brides">כלות אמיתיות</a>
       <a href="#contact">יצירת קשר</a>
     </nav>
-    <a href="#contact" class="header-cta">תיאום בוואטסאפ</a>
+    <a href="#contact" class="header-cta" data-wa-cta>תיאום בוואטסאפ</a>
     <button class="menu-btn" aria-label="תפריט">☰</button>
   </header>
 
@@ -29,7 +69,7 @@
     <a href="#collection">הקולקציה</a>
     <a href="#quiz">מבחן הסטייל</a>
     <a href="#brides">כלות אמיתיות</a>
-    <a href="#contact" class="header-cta">תיאום בוואטסאפ</a>
+    <a href="#contact" class="header-cta" data-wa-cta>תיאום בוואטסאפ</a>
   </div>
 
   <div class="ticker">
@@ -73,16 +113,16 @@
   <!-- ============ HERO ============ -->
   <section id="home" class="hero">
     <div class="hero-copy">
-      <div class="eyebrow">בוטיק שמלות כלה · Hand Made with <span class="love">love</span> · בנימינה</div>
-      <h1 class="serif">כל תפר מספר סיפור.<br>השמלה שלך מחכה.</h1>
+      <div class="eyebrow">בוטיק שמלות כלה · Hand Made with <span class="love">love</span> · חדרה</div>
+      <h1 class="serif">כל בד יחודי ומיוחד.<br>השמלה שלך מחכה.</h1>
       <p>בלי דמיוניות, בלי אכזבות ובלי חודשי המתנה. כל השמלות חדשות, תפורות ביד ומוכנות ללבישה כבר עכשיו — במחיר אחיד והוגן של 3,800 ₪.</p>
       <div class="hero-actions">
-        <a href="#contact" class="btn-solid">לתיאום פגישה בוואטסאפ</a>
+        <a href="#contact" class="btn-solid" data-wa-cta>לתיאום פגישה בוואטסאפ</a>
         <a href="#quiz" class="btn-outline">קחי את מבחן הסטייל</a>
       </div>
     </div>
     <div class="hero-media">
-      <img src="images/hero.jpg" alt="תמונת שמלה ראשית" data-hero-img>
+      <img src="images/hero.jpg" alt="תמונת שמלה ראשית" data-hero-img fetchpriority="high" decoding="async">
       <a href="#quiz" class="hero-quiz-badge">
         <span class="star">✦</span>
         <span class="txt"><b>מבחן הסטייל</b>מצאי את 3 השמלות המושלמות עבורך</span>
@@ -97,8 +137,8 @@
     <div class="section-head"><span class="section-tag serif">YOUR STORY, YOUR DRESS</span></div>
     <div class="usp-grid">
       <div class="usp"><span class="n">01</span><h3 class="serif">מחיר אחיד, בלי הפתעות</h3><p>3,800 ₪ לכל שמלה בסטודיו — המחיר שאת רואה הוא המחיר שאת משלמת.</p></div>
-      <div class="usp"><span class="n">02</span><h3 class="serif">מלאי אמיתי, כאן ועכשיו</h3><p>כל השמלות כבר תפורות ותלויות בסטודיו — את רואה, מודדת ולוקחת.</p></div>
-      <div class="usp"><span class="n">03</span><h3 class="serif">בלי חודשים של המתנה</h3><p>מודדת, מתאהבת ולוקחת אותה איתך הביתה — באותה פגישה.</p></div>
+      <div class="usp"><span class="n">02</span><h3 class="serif">מלאי אמיתי, כאן ועכשיו</h3><p>כל השמלות כבר תפורות ותלויות בסטודיו — את רואה, מודדת מתאהבת ולוקחת.</p></div>
+      <div class="usp"><span class="n">03</span><h3 class="serif">בלי חודשים של המתנה</h3><p>רואה בדיוק איך היא יושבת עלייך — לא בדמיון, אלא במראה, ממש עכשיו.</p></div>
       <div class="usp"><span class="n">04</span><h3 class="serif">ליווי אישי, פגישה אינטימית</h3><p>רק את והשמלה — בלי קהל ובלי לחץ, עם מישהי שקשובה בדיוק למה שחלמת.</p></div>
     </div>
   </section>
@@ -107,7 +147,7 @@
   <section>
     <div class="section-head">
       <span class="section-tag serif">LOVE AT FIRST FIT</span>
-      <h2 class="section-title serif">בחרי במה שהכי מתאים לך</h2>
+      <h2 class="section-title serif" dir="ltr">ONE DRESS. ONE YOU.</h2>
     </div>
     <div class="paths">
       <div class="path">
@@ -119,8 +159,8 @@
       <div class="path">
         <div class="icon">☏</div>
         <h3 class="serif">פגישה אישית בסטודיו</h3>
-        <p>מודדת, מתאהבת ולוקחת אותה איתך הביתה — הכל באותה פגישה, בבנימינה.</p>
-        <a href="#contact" class="btn-solid">לתיאום בוואטסאפ</a>
+        <p>מודדת, מתאהבת ולוקחת אותה איתך הביתה — הכל באותה פגישה, בחדרה.</p>
+        <a href="#contact" class="btn-solid" data-wa-cta>לתיאום בוואטסאפ</a>
       </div>
     </div>
   </section>
@@ -137,6 +177,10 @@
         <p class="sub" style="margin:0 0 28px;color:var(--muted);max-width:460px;margin-inline:auto;">נשלח לך 3 שמלות שנבחרו במיוחד בשבילך, ומתנה של 100 ₪ על השמלה שתבחרי.</p>
         <input type="text" placeholder="שם מלא" data-quiz-name required>
         <input type="tel" placeholder="טלפון נייד" data-quiz-phone required>
+        <label class="quiz-date-label">
+          <span>תאריך החתונה (אופציונלי)</span>
+          <input type="date" data-quiz-wedding-date>
+        </label>
         <button type="submit" class="btn-solid" style="border:0;cursor:pointer;">קבלי את התוצאה שלי</button>
       </form>
 
@@ -145,6 +189,25 @@
         <p style="color:var(--muted);margin:0 0 26px;">בחרנו במיוחד בשבילך 3 שמלות שמתאימות לסגנון שלך:</p>
         <div class="quiz-result-dresses" data-quiz-result-dresses></div>
         <a href="#contact" class="btn-solid">לתיאום פגישה ולראות אותן</a>
+      </div>
+    </div>
+
+    <!-- Alternative to the quiz: just leave details, no questions -->
+    <div class="simple-lead" data-simple-lead>
+      <button type="button" class="btn-outline" data-simple-lead-toggle>לא בא לך מבחן? השאירי פרטים בלבד</button>
+
+      <form data-simple-lead-form style="display:none;">
+        <input type="text" placeholder="שם מלא" data-lead-name required>
+        <input type="tel" placeholder="טלפון נייד" data-lead-phone required>
+        <label class="quiz-date-label">
+          <span>תאריך החתונה (אופציונלי)</span>
+          <input type="date" data-lead-wedding-date>
+        </label>
+        <button type="submit" class="btn-solid" style="border:0;cursor:pointer;">שלחי את הפרטים שלי</button>
+      </form>
+
+      <div data-simple-lead-result style="display:none;">
+        <p class="sub" style="color:var(--muted);">תודה! קיבלנו את הפרטים שלך ונחזור אלייך בקרוב ✦</p>
       </div>
     </div>
   </section>
@@ -172,9 +235,17 @@
   <!-- ============ STUDIO SPLIT ============ -->
   <section class="studio-split">
     <div class="grid">
-      <img src="images/studio.jpg" alt="תמונת הסטודיו">
+      <img src="images/studio.jpg" alt="תמונת הסטודיו" loading="lazy" decoding="async">
       <div class="copy">
-        <span class="section-tag serif studio-words"><span class="w">Unique.</span> <span class="w">TIMELESS.</span> <span class="w">Bold.</span></span>
+        <span class="section-tag serif studio-words">
+          <span class="w" style="--i:0">ELEGANT.</span>
+          <span class="w" style="--i:1">EFFORTLESS.</span>
+          <span class="w" style="--i:2">YOU.</span>
+          <span class="w" style="--i:3">CONFIDENCE.</span>
+          <span class="w" style="--i:4">TAILORED.</span>
+          <span class="w" style="--i:5">TIMELESS.</span>
+          <span class="w" style="--i:6">UNIQUE</span>
+        </span>
         <h2 class="serif">ברוכה הבאה לעתיד של שמלות כלה</h2>
         <p>אנחנו כאן כדי להפוך את המסע לחתונה להרבה יותר קליל, פשוט וכיפי. הבנו שאת רוצה פתרון זמין, נוח, איכותי ובמחיר שפוי — ואנחנו כאן להגשים את החלום. נשאר רק לבחור את השמלה המושלמת ולהתאהב.</p>
       </div>
@@ -237,7 +308,7 @@
   <footer id="contact" class="site-footer">
     <div class="logo"><img src="images/logo.png" alt="אלכסה בריידל"></div>
     <div class="footer-cols">
-      <div><span>מיקום</span>בנימינה, ישראל</div>
+      <div><span>מיקום</span>חדרה, ישראל</div>
       <div><span>טלפון / וואטסאפ</span>054-4806554</div>
       <div><span>אינסטגרם</span><a href="https://instagram.com/alexa.bridal" target="_blank" rel="noopener">@alexa.bridal</a></div>
       <div><span>שעות</span>בתיאום מראש</div>

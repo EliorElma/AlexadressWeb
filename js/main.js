@@ -11,20 +11,21 @@ if (typeof SITE === 'undefined') {
 
 // ---------------------------------------------------------------
 // Render: moving photo bands
-// Repeats the image list until each half is long enough, then doubles
-// it — the CSS -50% loop needs two identical halves to run seamlessly.
+// Each image appears exactly twice (the list, then the same list again) —
+// the CSS -50% loop needs those two identical halves to run seamlessly.
+// "first" is the very first thing on the page, so it loads eagerly;
+// "second" is far down the page, so its images lazy-load.
 // ---------------------------------------------------------------
-function fillBand(name, imgs) {
+function fillBand(name, imgs, lazy) {
   const track = document.querySelector('[data-band="' + name + '"]');
   if (!track || !imgs || !imgs.length) return;
-  const half = [];
-  while (half.length < 12) half.push(...imgs);
-  track.innerHTML = half.concat(half)
-    .map(src => '<div class="card"><img src="' + src + '" alt=""></div>')
+  const loadAttr = lazy ? ' loading="lazy" decoding="async"' : ' decoding="async"';
+  track.innerHTML = imgs.concat(imgs)
+    .map(src => '<div class="card"><img src="' + src + '" alt=""' + loadAttr + '></div>')
     .join('');
 }
-fillBand('first', SITE.first_band);
-fillBand('second', SITE.second_band);
+fillBand('first', SITE.first_band, false);
+fillBand('second', SITE.second_band, true);
 
 // ---------------------------------------------------------------
 // Render: hero image
@@ -40,13 +41,13 @@ if (heroImg && SITE.head_pic) heroImg.src = SITE.head_pic;
   if (!grid) return;
   grid.innerHTML = SITE.dresses.map(d => {
     const detailImg = d.detail
-      ? '<img class="img-third" src="' + d.detail + '" alt="' + d.name + ', פרט">'
+      ? '<img class="img-third" src="' + d.detail + '" alt="' + d.name + ', פרט" loading="lazy" decoding="async">'
       : '';
     const detailSeg = d.detail ? '<span class="seg" data-side="third">Detail</span>' : '';
     return '' +
       '<a class="dress-card" href="' + d.link + '" target="_blank" rel="noopener">' +
-        '<img class="img-front" src="' + d.front + '" alt="' + d.name + '">' +
-        '<img class="img-back" src="' + d.back + '" alt="' + d.name + ', גב השמלה">' +
+        '<img class="img-front" src="' + d.front + '" alt="' + d.name + '" loading="lazy" decoding="async">' +
+        '<img class="img-back" src="' + d.back + '" alt="' + d.name + ', גב השמלה" loading="lazy" decoding="async">' +
         detailImg +
         '<button type="button" class="fb-toggle" aria-label="בחרי תצוגה">' +
           '<span class="seg active" data-side="front">Front</span>' +
@@ -66,7 +67,7 @@ if (heroImg && SITE.head_pic) heroImg.src = SITE.head_pic;
   const row = document.querySelector('[data-brides]');
   if (!row) return;
   row.innerHTML = SITE.real_brides.map(b =>
-    '<div class="card"><img src="' + b.pic + '" alt="' + b.name + '">' +
+    '<div class="card"><img src="' + b.pic + '" alt="' + b.name + '" loading="lazy" decoding="async">' +
     '<div class="caption"><div class="name serif">' + b.name + '</div><div class="date">' + b.date + '</div></div></div>'
   ).join('');
 })();
@@ -78,7 +79,7 @@ if (heroImg && SITE.head_pic) heroImg.src = SITE.head_pic;
   const grid = document.querySelector('[data-moments]');
   if (!grid) return;
   grid.innerHTML = SITE.moments.map(src =>
-    '<div class="tile"><img src="' + src + '" alt=""></div>'
+    '<div class="tile"><img src="' + src + '" alt="" loading="lazy" decoding="async"></div>'
   ).join('');
 })();
 
@@ -101,8 +102,81 @@ if (heroImg && SITE.head_pic) heroImg.src = SITE.head_pic;
   if (!grid) return;
   const link = 'https://instagram.com/' + SITE.instagramHandle;
   grid.innerHTML = SITE.instagram_pics.map(src =>
-    '<a href="' + link + '" target="_blank" rel="noopener"><img src="' + src + '" alt="פוסט אינסטגרם"></a>'
+    '<a href="' + link + '" target="_blank" rel="noopener"><img src="' + src + '" alt="פוסט אינסטגרם" loading="lazy" decoding="async"></a>'
   ).join('');
+})();
+
+// ---------------------------------------------------------------
+// "תיאום בוואטסאפ" buttons — open WhatsApp with a ready-made message
+// instead of just scrolling to the footer.
+// ---------------------------------------------------------------
+(function initWhatsAppCTAs() {
+  const msg = 'היי, הגעתי מהאתר';
+  const href = 'https://wa.me/' + SITE.whatsappNumber + '?text=' + encodeURIComponent(msg);
+  document.querySelectorAll('[data-wa-cta]').forEach(a => {
+    a.href = href;
+    a.target = '_blank';
+    a.rel = 'noopener';
+  });
+})();
+
+// ---------------------------------------------------------------
+// Simple lead form — alternative to the quiz for a bride who just
+// wants to leave her details without answering questions.
+// ---------------------------------------------------------------
+(function initSimpleLead() {
+  const wrap = document.querySelector('[data-simple-lead]');
+  if (!wrap) return;
+  const toggleBtn = wrap.querySelector('[data-simple-lead-toggle]');
+  const form = wrap.querySelector('[data-simple-lead-form]');
+  const resultEl = wrap.querySelector('[data-simple-lead-result]');
+  const nameInput = wrap.querySelector('[data-lead-name]');
+  const phoneInput = wrap.querySelector('[data-lead-phone]');
+  const dateInput = wrap.querySelector('[data-lead-wedding-date]');
+
+  if (toggleBtn && form) {
+    toggleBtn.addEventListener('click', () => {
+      const showing = form.style.display !== 'none';
+      form.style.display = showing ? 'none' : 'block';
+      toggleBtn.style.display = showing ? 'inline-block' : 'none';
+    });
+  }
+
+  if (form) {
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const name = nameInput ? nameInput.value.trim() : '';
+      const phone = phoneInput ? phoneInput.value.trim() : '';
+      const weddingDateRaw = dateInput ? dateInput.value : '';
+      const weddingDate = weddingDateRaw ? weddingDateRaw.split('-').reverse().join('.') : '';
+
+      // 1) Send the lead to email via Web3Forms (only if a key was set).
+      if (SITE.web3formsKey && SITE.web3formsKey !== 'YOUR_WEB3FORMS_ACCESS_KEY') {
+        fetch('https://api.web3forms.com/submit', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+          body: JSON.stringify({
+            access_key: SITE.web3formsKey,
+            subject: 'ליד חדש מהאתר (בלי מבחן) — אלכסה בריידל',
+            from_name: 'אתר אלכסה בריידל',
+            'שם': name || '-',
+            'טלפון': phone || '-',
+            'תאריך החתונה': weddingDate || '-'
+          })
+        }).catch(() => { /* never block the bride's flow on a network error */ });
+      }
+
+      // 2) Also open WhatsApp with a ready-made message.
+      const msg = 'היי, הגעתי מהאתר.\n' +
+        'שם: ' + (name || '-') + '\n' +
+        'טלפון: ' + (phone || '-') +
+        (weddingDate ? '\nתאריך החתונה: ' + weddingDate : '');
+      window.open('https://wa.me/' + SITE.whatsappNumber + '?text=' + encodeURIComponent(msg), '_blank');
+
+      form.style.display = 'none';
+      if (resultEl) resultEl.style.display = 'block';
+    });
+  }
 })();
 
 // ---------------------------------------------------------------
@@ -139,6 +213,7 @@ if (menuBtn && mobileMenu) {
   const resultDressesEl = root.querySelector('[data-quiz-result-dresses]');
   const nameInput = root.querySelector('[data-quiz-name]');
   const phoneInput = root.querySelector('[data-quiz-phone]');
+  const weddingDateInput = root.querySelector('[data-quiz-wedding-date]');
 
   function renderDots() {
     dotsEl.innerHTML = '';
@@ -213,6 +288,10 @@ if (menuBtn && mobileMenu) {
       e.preventDefault();
       const name = nameInput ? nameInput.value.trim() : '';
       const phone = phoneInput ? phoneInput.value.trim() : '';
+      const weddingDateRaw = weddingDateInput ? weddingDateInput.value : '';
+      const weddingDate = weddingDateRaw
+        ? weddingDateRaw.split('-').reverse().join('.') // yyyy-mm-dd -> dd.mm.yyyy
+        : '';
       const dresses = getResultDresses();
 
       state.done = true;
@@ -231,6 +310,7 @@ if (menuBtn && mobileMenu) {
       const msg = 'היי! השלמתי את מבחן הסטייל באתר אלכסה.\n' +
         'שם: ' + (name || '-') + '\n' +
         'טלפון: ' + (phone || '-') + '\n' +
+        (weddingDate ? 'תאריך החתונה: ' + weddingDate + '\n' : '') +
         'השמלות שהתאימו לי: ' + dressNames;
 
       // 1) Send the lead to email via Web3Forms (only if a key was set).
@@ -244,6 +324,7 @@ if (menuBtn && mobileMenu) {
             from_name: 'אתר אלכסה בריידל',
             'שם': name || '-',
             'טלפון': phone || '-',
+            'תאריך החתונה': weddingDate || '-',
             'שמלות שהתאימו': dressNames
           })
         }).catch(() => { /* never block the bride's flow on a network error */ });
