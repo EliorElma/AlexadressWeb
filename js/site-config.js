@@ -20,16 +20,15 @@ const SITE = {
   // ---------- הרצועה הנעה העליונה (תמונות חתוכות, רקע שקוף) ----------
   // אפשר להוסיף/להסיר כמה שרוצים — הרצועה מסתדרת לבד
   "first_band": [
-    "images/band-1.png",
-    "images/band-2.png",
-    "images/band-3.png",
-    "images/band-4.png",
-    "images/band-5.png",
-    "images/band-6.png",
-    "images/band-7.png",
-    "images/band-8.png",
-    "images/band-9.png",
-
+    "images/band-1.webp",
+    "images/band-2.webp",
+    "images/band-3.webp",
+    "images/band-4.webp",
+    "images/band-5.webp",
+    "images/band-6.webp",
+    "images/band-7.webp",
+    "images/band-8.webp",
+    "images/band-9.webp"
   ],
 
   // ---------- הקולקציה ----------
