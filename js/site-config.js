@@ -37,52 +37,76 @@ const SITE = {
   // וכפתור ה-Detail לא יופיע לשמלה הזאת.
   "dresses": [
     {
-      "name": "הילה",
+      "name": "סלין",
       "price": "3,800 ₪",
-      "link": "https://bridals-il.com/product/הילה/",
-      "front": "images/dress-1.jpg",
-      "back": "images/dress-1-back.jpg",
-      "detail": "images/dress-1-third.jpg"
+      "link": "https://bridals-il.com/product/סלין/",
+      "front": "images/Salin_front.jpg",
+      "back": "images/Salin_back.jpg",
+      "detail": "images/Salin_detail.jpg"
     },
     {
-      "name": "קים",
+      "name": "אמור",
       "price": "3,800 ₪",
-      "link": "https://bridals-il.com/product/קים/",
-      "front": "images/dress-2.jpg",
-      "back": "images/dress-2-back.jpg",
-      "detail": "images/dress-2-third.jpg"
+      "link": "https://bridals-il.com/product/אמור/",
+      "front": "images/amor_front.jpg",
+      "back": "images/amor_back.jpg",
+      "detail": "images/amor_detial.jpg"
     },
     {
-      "name": "מיקה",
+      "name": "לוסי",
       "price": "3,800 ₪",
-      "link": "https://bridals-il.com/product/מיקה/",
-      "front": "images/dress-3.jpg",
-      "back": "images/dress-3-back.jpg",
-      "detail": "images/dress-3-third.jpg"
+      "link": "https://bridals-il.com/product/לוסי/",
+      "front": "images/losi_front.jpg",
+      "back": "images/losi_back.jpg",
+      "detail": "images/losi_detial.jpg"
     },
     {
-      "name": "עמית",
+      "name": "קורל",
       "price": "3,800 ₪",
-      "link": "https://bridals-il.com/product/עמית/",
-      "front": "images/dress-4.jpg",
-      "back": "images/dress-4-back.jpg",
-      "detail": "images/dress-4-third.jpg"
+      "link": "https://bridals-il.com/product/קורל/",
+      "front": "images/Koral_front.jpg",
+      "back": "images/Koral_back.jpg",
+      "detail": "images/Koral_detial.jpg"
     },
     {
-      "name": "רומא",
+      "name": "אדל",
       "price": "3,800 ₪",
-      "link": "https://bridals-il.com/product/רומא/",
-      "front": "images/dress-5.jpg",
-      "back": "images/dress-5-back.jpg",
-      "detail": "images/dress-5-third.jpg"
+      "link": "https://bridals-il.com/product/אדל/",
+      "front": "images/Adel_front.jpg",
+      "back": "images/Adel_back.jpg",
+      "detail": "images/Adel_detial.jpg"
     },
     {
-      "name": "פריז",
+      "name": "נועה",
       "price": "3,800 ₪",
-      "link": "https://bridals-il.com/product/פריז/",
-      "front": "images/dress-6.jpg",
-      "back": "images/dress-6-back.jpg",
-      "detail": "images/dress-6-third.jpg"
+      "link": "https://bridals-il.com/product/נועה/",
+      "front": "images/Noa_front.jpg",
+      "back": "images/Noa_back.jpg",
+      "detail": "images/Noa_detial.jpg"
+    },
+    {
+      "name": "מוניק",
+      "price": "3,800 ₪",
+      "link": "https://bridals-il.com/product/מוניק/",
+      "front": "images/Moniqe_Front.jpg",
+      "back": "images/Moniqe_back.jpg",
+      "detail": "images/Moniqe_detial.jpg"
+    },
+    {
+      "name": "אלור",
+      "price": "3,800 ₪",
+      "link": "https://bridals-il.com/product/אלור/",
+      "front": "images/Alor_front.jpg",
+      "back": "images/Alor_back.jpg",
+      "detail": "images/Alor_detials.jpg"
+    },
+    {
+      "name": "פלור",
+      "price": "3,800 ₪",
+      "link": "https://bridals-il.com/product/פלור/",
+      "front": "images/Flor_front.jpg",
+      "back": "images/Flor_back.jpg",
+      "detail": "images/Flor_Detials.jpg"
     }
   ],
 
@@ -108,9 +132,9 @@ const SITE = {
       }
     ],
     "answerDressMap": [
-      { "רומנטית וקלילה": "הילה", "קלאסית ונקייה": "קים", "נועזת ומיוחדת": "מיקה" },
-      { "A-line נשית": "עמית", "מחשוף לב ותחרה": "רומא", "נשפכת ומינימליסטית": "פריז" },
-      { "אולם מרווח": "הילה", "חצר וגינה": "קים", "חוף ים": "מיקה" }
+      { "רומנטית וקלילה": "סלין", "קלאסית ונקייה": "אמור", "נועזת ומיוחדת": "לוסי" },
+      { "A-line נשית": "קורל", "מחשוף לב ותחרה": "אדל", "נשפכת ומינימליסטית": "נועה" },
+      { "אולם מרווח": "מוניק", "חצר וגינה": "אלור", "חוף ים": "פלור" }
     ]
   },
 
